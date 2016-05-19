@@ -42,9 +42,9 @@ public class CustomDialog extends Dialog {
 		}
 
 		/**
-		 * Set the Dialog message from resource
-		 * 
-		 * @param title
+		 * Set the Dialog title from resource
+		 *
+		 * @param
 		 * @return
 		 */
 		public Builder setMessage(int message) {

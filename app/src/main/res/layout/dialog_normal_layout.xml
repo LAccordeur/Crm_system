@@ -10,7 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/bg_bombbox"
+
         android:orientation="vertical" >
 
         <TextView
@@ -51,7 +51,7 @@
             android:layout_width="fill_parent"
             android:layout_height="60.0dip"
             android:layout_gravity="bottom"
-            android:background="@drawable/dialog_bottom_bg"
+
             android:gravity="center"
             android:orientation="horizontal" >
 
@@ -60,7 +60,7 @@
                 style="@style/text_15_ffffff_sdw"
                 android:layout_width="114.0dip"
                 android:layout_height="40.0dip"
-                android:background="@drawable/btn_ok_selector"
+
                 android:gravity="center"
                 android:text="@string/ok" />
 
