@@ -8,6 +8,10 @@ import com.example.jjj.crm_system.ui.Base.BaseFragment;
 /**
  * Created by jjj on 2016/7/2 0002.
  */
+
+/**
+ * 商家首页
+ */
 public class HomeFragment extends BaseFragment{
     @Override
     protected int getRootView() {

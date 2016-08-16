@@ -56,14 +56,23 @@
                     android:layout_width="100dp"
                     android:layout_alignParentRight="true"
                     android:paddingLeft="10dp"
-                    android:id="@+id/bt_sendVerificationcode_customerlogin"
+                    android:id="@+id/bt_getVerificationcode_customerlogin"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:layout_alignTop="@id/et_VerificationCode_customerlogin"
                     android:layout_alignBottom="@id/et_VerificationCode_customerlogin"
                     android:background="@drawable/shape_edittext"
-                    android:text="发送验证码"/>
+                    android:text="获取验证码"/>
             </RelativeLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@drawable/shape_button"
+                android:text="登陆"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:id="@+id/bt_login_customerlogin"
+                android:layout_gravity="center_horizontal"/>
         </LinearLayout>
         <RelativeLayout
             android:layout_width="match_parent"
