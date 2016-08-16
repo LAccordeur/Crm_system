@@ -1,9 +1,8 @@
 package com.example.jjj.crm_system.utils;
 
 /**
- * Created by Mr.Jadyn on 15/8/27.
+ * Created by jjj on 2016/5/19 0019.
  */
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -97,7 +96,7 @@ public class ImageLoader {
 
     }
 
-    private ImageLoader() {
+    private  ImageLoader() {
 
     }
 
@@ -246,7 +245,7 @@ public class ImageLoader {
         if(fileName==null){
             return null;
         }
-        String path=mContext.getCacheDir().getAbsolutePath()+ File.separator+fileName;
+        String path=mContext.getCacheDir().getAbsolutePath()+File.separator+fileName;
         System.out.println(path);
         FileInputStream is = null;
         try {

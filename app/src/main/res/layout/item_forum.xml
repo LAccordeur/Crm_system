@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_mes_forum"
+        android:textColor="#FF8247"
+        android:textSize="20dp"/>
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="20dp"
+        android:layout_below="@id/tv_mes_forum"
+        android:layout_alignParentRight="true"
+
+        android:layout_marginRight="2dp"
+        android:text="评论"
+        android:textSize="8dp"
+        android:id="@+id/bt_comment_forum"/>
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="20dp"
+        android:id="@+id/bt_support_forum"
+        android:textSize="8dp"
+        android:layout_marginRight="2dp"
+
+        android:layout_toLeftOf="@id/bt_comment_forum"
+        android:layout_below="@id/tv_mes_forum"
+        android:text="赞"
+        />
+</RelativeLayout>

@@ -8,10 +8,6 @@ import com.example.jjj.crm_system.ui.Base.BaseFragment;
 /**
  * Created by jjj on 2016/7/2 0002.
  */
-
-/**
- * 商家优惠活动
- */
 public class AccountFragment extends BaseFragment {
     @Override
     protected void setListener() {

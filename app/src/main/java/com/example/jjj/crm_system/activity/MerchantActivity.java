@@ -1,8 +1,13 @@
 package com.example.jjj.crm_system.activity;
 
+import android.app.FragmentManager;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.RadioButton;
@@ -39,8 +44,8 @@ public class MerchantActivity extends BaseActivity {
     @Override
     protected void init() {
         fragments = new ArrayList<BaseFragment>();
-        fragments.add(0,new HomeFragment());
-        fragments.add(1,new AccountFragment());
+        fragments.add(0,new AccountFragment());
+        fragments.add(1,new HomeFragment());
         fragments.add(2,new ScoreFragment());
         fm = getSupportFragmentManager();
 
@@ -62,10 +67,10 @@ public class MerchantActivity extends BaseActivity {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 switch (vp_merchant.getCurrentItem()) {
-                    case 1:
+                    case 0:
                         rb_mydiscount_merchant.setChecked(true);
                         break;
-                    case 0:
+                    case 1:
                         rb_home_merchant.setChecked(true);
                         break;
 
@@ -82,10 +87,10 @@ public class MerchantActivity extends BaseActivity {
                 int position = -1;
                 switch (checkedId) {
                     case R.id.rb_mydiscount_merchant:
-                        position = 1;
+                        position = 0;
                         break;
                     case R.id.rb_home_merchant:
-                        position = 0;
+                        position = 1;
                         break;
                     case R.id.rb_score_merchant:
                         position = 2;
@@ -123,10 +128,10 @@ public class MerchantActivity extends BaseActivity {
 
     private void alterTitle(int position){
         switch (position){
-            case 1:
+            case 0:
                 tv_title_merchant.setText("活动");
                 break;
-            case 0:
+            case 1:
                 tv_title_merchant.setText("主页");
                 break;
             case 2:
