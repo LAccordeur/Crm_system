@@ -6,7 +6,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="44dp"
-        android:background="#66CC66"
+        android:background="#fa9e26"
         android:id="@+id/rl_head_merchant">
         <TextView
             android:layout_width="wrap_content"
@@ -14,9 +14,9 @@
             android:id="@+id/tv_title_merchant"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="首页"
+            android:text="主页"
             android:textColor="#ffffff"
-            android:textSize="18dp"/>
+            android:textSize="30dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

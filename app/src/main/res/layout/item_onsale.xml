@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:background="@drawable/layout_border"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@mipmap/ic_launcher"
+        android:id="@+id/iv_png_onsaleitem"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:id="@+id/tv_onsalename_onsaleitem"
+        android:layout_toRightOf="@id/iv_png_onsaleitem"
+        android:layout_marginLeft="10dp"
+        android:text="活动名称"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/huodongqixian"
+        android:textColor="#000000"
+        android:layout_toRightOf="@id/iv_png_onsaleitem"
+        android:layout_above="@+id/tv_details_onsaleitme"
+        android:layout_marginLeft="10dp"
+        android:text="活动期限："/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="详情>"
+
+        android:id="@+id/tv_details_onsaleitme"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:textColor="@drawable/textcolor_1"
+        android:layout_alignBottom="@id/iv_png_onsaleitem"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2016_7_21-2016_8_11"
+        android:textColor="#000000"
+        android:id="@+id/tv_onsaletime_onsaleitem"
+        android:layout_toRightOf="@id/huodongqixian"
+        android:layout_alignTop="@id/huodongqixian"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="#000000"
+        android:layout_toRightOf="@id/iv_png_onsaleitem"
+        android:layout_below="@id/tv_onsalename_onsaleitem"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/tv_introdaction_onsaleitem"
+        android:text="活动简介区域"
+        android:layout_above="@id/huodongqixian"/>
+
+
+
+</RelativeLayout>

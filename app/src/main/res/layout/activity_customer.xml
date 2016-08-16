@@ -1,9 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+    android:background="#efeff4"
     android:layout_height="match_parent">
-    <TextView
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="#66CC66"
+        android:id="@+id/rl_head_customer">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_title_customer"
+            android:text="首页"
+            android:textColor="#ffffff"
+            android:textSize="18dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="返回"
+            android:textColor="#ffffff"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/tv_back_customer"
+            android:textSize="18dp"/>
+    </RelativeLayout>
+    <com.example.jjj.crm_system.ui.view.MyViewPager
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="客户activity"/>
-</LinearLayout>
+        android:layout_below="@id/rl_head_customer"
+        android:id="@+id/vp_customer"
+        android:layout_above="@+id/rg_customer"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"></com.example.jjj.crm_system.ui.view.MyViewPager>
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rg_customer"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="@drawable/shape_tab_merchant">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/rb_home_customer"
+            android:button="@null"
+            android:gravity="center"
+            android:checked="true"
+            android:paddingTop="4dp"
+            android:drawableTop="@drawable/selector_tab_home_merchant"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/rb_individual_customer"
+            android:button="@null"
+            android:gravity="center"
+            android:checked="true"
+            android:paddingTop="4dp"
+            android:drawableTop="@drawable/selector_tab_account_merchant"/>
+    </RadioGroup>
+</RelativeLayout>
