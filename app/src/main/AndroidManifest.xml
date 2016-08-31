@@ -58,7 +58,11 @@
             android:name=".activity.MerchintInfoActivity"
             android:label="MerchintInfoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.GoodsInfoActivity"></activity>
+        <activity
+            android:name=".activity.GoodsInfoActivity"
+            android:label="MerchintInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.OnsaleInfoActivity"></activity>
     </application>
 
 </manifest>

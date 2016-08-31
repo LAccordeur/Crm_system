@@ -55,6 +55,7 @@ public class MerchintInfoActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MerchintInfoActivity.this,GoodsInfoActivity.class);
+                startActivity(intent);
             }
         });
     }

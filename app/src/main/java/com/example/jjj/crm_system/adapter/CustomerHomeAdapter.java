@@ -1,6 +1,7 @@
 package com.example.jjj.crm_system.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.jjj.crm_system.activity.OnsaleInfoActivity;
 import com.example.jjj.crm_system.domain.CustomerOnsaleObject;
 import com.example.jjj.crm_system.R;
 import com.example.jjj.crm_system.utils.ImageLoader;
@@ -26,6 +28,9 @@ public class CustomerHomeAdapter extends BaseAdapter{
         this.context = context;
         imageLoader = ImageLoader.getInstance(context);
     }
+
+
+
     @Override
     public int getCount() {
         return this.list.size();
@@ -41,7 +46,7 @@ public class CustomerHomeAdapter extends BaseAdapter{
         ImageView iv_storepng = (ImageView)view.findViewById(R.id.iv_png_onsaleitem);
 
         tv_onsaleName.setText(list.get(position).getOnsaleName());
-        tv_onsaleTime.setText(list.get(position).getOnsaleTime());
+        tv_onsaleTime.setText(list.get(position).getOnsaleStartTime()+"-"+list.get(position).getOnsaleEndTime());
         tv_introduction.setText(list.get(position).getOnsaleIntroduction());
         //imageLoader.loadImage(list.get(position).getOnsaleImageUrl(),iv_storepng);
         return view;
