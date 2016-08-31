@@ -1,10 +1,12 @@
 package com.example.jjj.crm_system.fragment;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.example.jjj.crm_system.activity.MerchintInfoActivity;
 import com.example.jjj.crm_system.domain.CustomerOnsaleObject;
 import com.example.jjj.crm_system.R;
 import com.example.jjj.crm_system.adapter.CustomerHomeAdapter;
@@ -60,6 +62,8 @@ public class CustomerHomeFragment extends BaseFragment {
         tv_details_customerhome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MerchintInfoActivity.class);
+                startActivity(intent);
 
             }
         });
