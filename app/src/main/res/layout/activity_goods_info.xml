@@ -9,6 +9,7 @@
         android:layout_height="44dp"
         android:layout_alignParentTop="true"
         android:orientation="horizontal"
+        android:id="@+id/rl_top_goodsinfo"
         android:background="#66CC66"
         >
         <ImageView

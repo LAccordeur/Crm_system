@@ -107,7 +107,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:textColor="@drawable/textcolor_1"
-                android:id="@+id/tv_details_customerhome"
+                android:id="@+id/tv_details_home"
                 android:text="详情>"/>
         </LinearLayout>
 

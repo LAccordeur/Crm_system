@@ -55,32 +55,34 @@
         android:textSize="20dp"
         android:id="@+id/tv_starttime"
         android:layout_above="@+id/tv_endtime"
-
         android:layout_margin="10dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="生效时间："
+        android:text="结束时间："
         android:textSize="20dp"
         android:id="@+id/tv_endtime"
+
         android:layout_alignParentBottom="true"
-        android:layout_margin="10dp"/>
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="30dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/tv_starttime"
         android:textSize="20dp"
-        android:text="123"
+
         android:layout_alignTop="@id/tv_starttime"
         android:id="@+id/tv_starttime_onsaleinfo"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="12"
+
         android:textSize="20dp"
         android:layout_toRightOf="@id/tv_endtime"
         android:id="@+id/tv_endtime_onsaleinfo"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="10dp"
         />
 </RelativeLayout>
