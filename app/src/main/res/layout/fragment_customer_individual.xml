@@ -52,7 +52,7 @@
             android:layout_centerInParent="true"
             android:textSize="24dp"
 
-            android:text="小智"
+            android:text="张三"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -94,11 +94,11 @@
             android:paddingBottom="10dp"
             android:paddingLeft="8dp"
             android:paddingRight="8dp">
-            <ListView
+            <com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshListView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/shape_edittext"
-                android:id="@+id/lv_accountinfo_coustomerindividual"></ListView>
+                android:id="@+id/lv_accountinfo_coustomerindividual"></com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshListView>
             </LinearLayout>
         </LinearLayout>
 </LinearLayout>

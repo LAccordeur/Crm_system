@@ -1,5 +1,9 @@
 package com.example.jjj.crm_system.utils;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -100,5 +104,16 @@ public class HttpUtil
 				});
 		new Thread(task).start();
 		return task.get();
+	}
+	/**
+	 * 下载
+	 *
+	 * @param key 地址
+	 * @return
+	 * @throws IOException
+	 */
+	public static InputStream downLoad(String key) throws IOException {
+		HttpURLConnection conn = (HttpURLConnection) new URL(key).openConnection();
+		return conn.getInputStream();
 	}
 }

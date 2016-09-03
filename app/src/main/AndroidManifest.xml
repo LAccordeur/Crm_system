@@ -60,10 +60,14 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.GoodsInfoActivity"
-            android:label="MerchintInfoActivity"
+            android:label="GoodsInfoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.OnsaleInfoActivity"
-            android:label="MerchintInfoActivity"
+        <activity
+            android:name=".activity.OnsaleInfoActivity"
+            android:label="OnsaleInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.AddOnsaleActivity"
+            android:label="OnsaleInfoActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 

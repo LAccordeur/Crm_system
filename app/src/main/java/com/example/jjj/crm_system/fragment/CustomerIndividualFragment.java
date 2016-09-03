@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.example.jjj.crm_system.R;
 import com.example.jjj.crm_system.ui.Base.BaseFragment;
+import com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshListView;
 import com.example.jjj.crm_system.ui.view.CircleImage;
 import com.example.jjj.crm_system.ui.view.CircleImageView;
 import com.example.jjj.crm_system.utils.ImageLoader;
@@ -24,7 +25,7 @@ public class CustomerIndividualFragment extends BaseFragment {
     private  TextView et_account_coustomerindividual;
     private CircleImageView iv_portrait_customerindividual;
     private ImageLoader imageLoader;
-    private ListView lv;
+    private PullToRefreshListView lv;
 
     @Override
     protected int getRootView() {
@@ -46,7 +47,7 @@ public class CustomerIndividualFragment extends BaseFragment {
     protected void initData(View view) {
         et_name_customerindividual = (TextView)view.findViewById(R.id.et_name_coustomerindividual);
         et_account_coustomerindividual = (TextView)view.findViewById(R.id.et_totalaccount_coustomerindividual);
-        lv = (ListView)view.findViewById(R.id.lv_accountinfo_coustomerindividual);
+        lv = (PullToRefreshListView) view.findViewById(R.id.lv_accountinfo_coustomerindividual);
         iv_portrait_customerindividual = (CircleImageView) view.findViewById(R.id.iv_portrait_customerindividual);
 
 
