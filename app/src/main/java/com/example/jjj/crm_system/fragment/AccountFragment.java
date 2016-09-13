@@ -6,6 +6,7 @@ import android.view.View;
 import com.example.jjj.crm_system.R;
 import com.example.jjj.crm_system.activity.AddOnsaleActivity;
 import com.example.jjj.crm_system.ui.Base.BaseFragment;
+import com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshListView;
 import com.example.jjj.crm_system.ui.view.CircleImage;
 import com.example.jjj.crm_system.ui.view.CircleImageView;
 
@@ -18,6 +19,7 @@ import com.example.jjj.crm_system.ui.view.CircleImageView;
  */
 public class AccountFragment extends BaseFragment {
     private CircleImageView iv_add;
+    private PullToRefreshListView ptr_onsaleList;
     @Override
     protected void setListener() {
         iv_add.setOnClickListener(new View.OnClickListener() {
@@ -34,6 +36,7 @@ public class AccountFragment extends BaseFragment {
     @Override
     protected void initData(View view) {
         iv_add = (CircleImageView)view.findViewById(R.id.iv_addOnsale_account);
+        ptr_onsaleList = (PullToRefreshListView)view.findViewById(R.id.ptr_onsaleList_account);
 
     }
 

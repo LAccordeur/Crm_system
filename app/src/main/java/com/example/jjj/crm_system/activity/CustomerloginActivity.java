@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.jjj.crm_system.R;
 import com.example.jjj.crm_system.ui.Base.BaseActivity;
@@ -65,24 +66,29 @@ public class CustomerloginActivity extends BaseActivity {
                 phoneString = et_phonenum_customerlogin.getText().toString();
                 VerificationCodeString = et_VerificationCode_customerlogin.getText().toString();
                 if(phoneString.equals("")||phoneString==null){
-                    builder.setMessage("电话号码不能为空！！！");
-                    builder.setTitle("Error");
+                    Toast.makeText(getBaseContext(),"电话号码不能为空！",Toast.LENGTH_LONG).show();
+                    return;
+                   // builder.setMessage("电话号码不能为空！！！");
+                   // builder.setTitle("Error");
+                   /*
                     builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
                         }
-                    });
+                    });*/
                 }
                 if(VerificationCodeString.equals("")||VerificationCodeString==null){
-                    builder.setMessage("验证码不能为空！！！");
+                   /* builder.setMessage("验证码不能为空！！！");
                     builder.setTitle("Error");
                     builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
                         }
-                    });
+                    });*/
+                    Toast.makeText(getBaseContext(),"验证码不能为空！",Toast.LENGTH_LONG).show();
+                    return;
                 }
 
 

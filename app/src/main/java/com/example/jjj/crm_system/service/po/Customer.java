@@ -1,6 +1,8 @@
 package com.example.jjj.crm_system.service.po;
 
-public class Customer {
+import java.io.Serializable;
+
+public class Customer implements Serializable {
     private Integer customid;
 
     private String telephonenumber;

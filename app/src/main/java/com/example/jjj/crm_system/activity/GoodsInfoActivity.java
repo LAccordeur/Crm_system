@@ -1,21 +1,37 @@
 package com.example.jjj.crm_system.activity;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.jjj.crm_system.R;
+import com.example.jjj.crm_system.service.GoodsService;
+import com.example.jjj.crm_system.service.po.Goods;
 import com.example.jjj.crm_system.ui.Base.BaseActivity;
+import com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshBase;
+import com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshListView;
 import com.example.jjj.crm_system.utils.ActivityUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GoodsInfoActivity extends BaseActivity {
     private ImageView iv_back;
     private String top_background;
     private RelativeLayout rl_top;
+    private List<Goods> goodsList;
+    private TextView tv_add;
+    private int intent_id;
+    private PullToRefreshListView ptr_goods;
+    private GoodsAdapter adpter;
 
     /**
      * 加载UI前的预初始化
@@ -23,6 +39,12 @@ public class GoodsInfoActivity extends BaseActivity {
     @Override
     protected void init() {
         //top_background = (String)getIntent().getStringExtra("top_background");
+        Bundle bundle = new Bundle();
+        bundle = getIntent().getExtras();
+        intent_id = bundle.getInt("intent_id");
+        //System.out.println("--->-跳转信息--->"+intent_id);
+
+
 
     }
 
@@ -48,6 +70,21 @@ public class GoodsInfoActivity extends BaseActivity {
                 ActivityUtil.finishActivty();
             }
         });
+        tv_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(GoodsInfoActivity.this,AddGoodsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ptr_goods.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+                initListview();
+
+            }
+        });
     }
 
     /**
@@ -56,11 +93,98 @@ public class GoodsInfoActivity extends BaseActivity {
     @Override
     protected void initData() {
         iv_back = (ImageView)findViewById(R.id.iv_back_goodsinfo);
+        tv_add = (TextView)findViewById(R.id.iv_add_goodsinfo);
+        ptr_goods = (PullToRefreshListView)findViewById(R.id.ptr_goods_goodsinfo);
+        goodsList = new ArrayList<Goods>();
+        viewManager(intent_id);
 
-       // if(top_background!=null&&top_background!=""){
-           // rl_top.setBackgroundColor(Color.parseColor(top_background));
-         //   rl_top.setBackgroundColor(Color.RED);
-       // }
+        initListview();
 
+    }
+
+    private void initGoodsList(){
+        try {
+            goodsList = GoodsService.getGoodsInf();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void initListview(){
+        initGoodsList();
+        adpter = new GoodsAdapter(goodsList,this.getBaseContext(),intent_id);
+        ptr_goods.setAdapter(adpter);
+
+
+    }
+
+    private void viewManager(int Intent_id){
+        if(Intent_id == 0){
+            tv_add.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private class GoodsAdapter extends BaseAdapter{
+        private List<Goods> goods;
+        private Context context;
+        private int intent_id;
+
+        public GoodsAdapter(List<Goods> goods, Context context,int intent_id) {
+            this.goods = goods;
+            this.context = context;
+            this.intent_id = intent_id;
+
+        }
+
+        @Override
+        public int getCount() {
+            return goods.size();
+        }
+
+        @Override
+        public Object getItem(int positon) {
+            return goods.get(positon);
+        }
+
+        @Override
+        public long getItemId(int positon) {
+            return positon;
+        }
+
+        private class EditGoodsListener implements View.OnClickListener{
+            private Goods good;
+
+            public EditGoodsListener(Goods good) {
+                this.good = good;
+            }
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(GoodsInfoActivity.this,GoodsEditActivity.class);
+                intent.putExtra("goods_info",good);
+                startActivity(intent);
+
+
+            }
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            View view = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.item_goodsinfo,null);
+            ImageView iv_pic_goods = (ImageView)view.findViewById(R.id.iv_pic_goodsitem);
+            TextView tv_name_goods = (TextView)view.findViewById(R.id.tv_name_goodsitem);
+            TextView tv_price_goods = (TextView)view.findViewById(R.id.tv_price_goodsitem);
+            TextView tv_detailss_goods = (TextView)view.findViewById(R.id.tv_details_goodsitem);
+            ImageView iv_edit_goods = (ImageView)view.findViewById(R.id.iv_goodsedit_goodsitem);
+
+            if(intent_id == 0) iv_edit_goods.setVisibility(View.INVISIBLE);
+            tv_name_goods.setText(goods.get(position).getGoodsname());
+            tv_price_goods.setText(goods.get(position).getGoodsmoney()+"");
+            tv_detailss_goods.setText(goods.get(position).getGoodsdetail());
+            iv_edit_goods.setOnClickListener(new EditGoodsListener(goods.get(position)));
+
+            return view;
+        }
     }
 }

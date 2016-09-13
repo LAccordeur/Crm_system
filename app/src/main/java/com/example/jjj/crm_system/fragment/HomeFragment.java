@@ -1,12 +1,14 @@
 package com.example.jjj.crm_system.fragment;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.jjj.crm_system.R;
 import com.example.jjj.crm_system.activity.GoodsInfoActivity;
+import com.example.jjj.crm_system.activity.MemberInfoActivity;
 import com.example.jjj.crm_system.activity.MerchintInfoActivity;
 import com.example.jjj.crm_system.ui.Base.BaseFragment;
 
@@ -20,6 +22,7 @@ import com.example.jjj.crm_system.ui.Base.BaseFragment;
 public class HomeFragment extends BaseFragment{
     private TextView tv_details,tv_acconthome;
     private Button bt_goods;
+
     @Override
     protected int getRootView() {
         return R.layout.fragment_home;
@@ -36,6 +39,7 @@ public class HomeFragment extends BaseFragment{
         tv_details = (TextView)view.findViewById(R.id.tv_details_home);
         bt_goods = (Button)view.findViewById(R.id.goods_bt);
 
+
     }
 
     @Override
@@ -45,7 +49,9 @@ public class HomeFragment extends BaseFragment{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), GoodsInfoActivity.class);
-               // intent.putExtra("top_background","#fa9e26");
+                Bundle bundle = new Bundle();
+                bundle.putInt("intent_id",1);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -54,6 +60,16 @@ public class HomeFragment extends BaseFragment{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), MerchintInfoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("intent_id",1);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        tv_acconthome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent  = new Intent(getActivity(), MemberInfoActivity.class);
                 startActivity(intent);
             }
         });

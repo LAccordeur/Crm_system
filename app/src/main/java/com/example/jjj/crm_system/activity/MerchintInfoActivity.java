@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.jjj.crm_system.R;
+import com.example.jjj.crm_system.service.ShopownerService;
+import com.example.jjj.crm_system.service.po.Shopowner;
 import com.example.jjj.crm_system.ui.Base.BaseActivity;
 import com.example.jjj.crm_system.utils.ActivityUtil;
 
@@ -19,12 +21,26 @@ public class MerchintInfoActivity extends BaseActivity {
     private TextView tv_worktime;
     private TextView tv_phonenum;
     private TextView tv_goods;
+    private int Intent_id;
+
+    private Shopowner merchint;
+
 
     /**
      * 加载UI前的预初始化
      */
     @Override
     protected void init() {
+        Bundle bundle = new Bundle();
+        bundle = getIntent().getExtras();
+        Intent_id = bundle.getInt("intent_id");
+
+        try {
+            merchint = ShopownerService.getShopownerInf(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
     }
 
@@ -55,6 +71,9 @@ public class MerchintInfoActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MerchintInfoActivity.this,GoodsInfoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("intent_id",Intent_id);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -63,6 +82,8 @@ public class MerchintInfoActivity extends BaseActivity {
     /**
      * 请求数据，设置UI
      */
+
+    //需要商家电话信息
     @Override
     protected void initData() {
 
@@ -73,5 +94,10 @@ public class MerchintInfoActivity extends BaseActivity {
         tv_phonenum = (TextView)findViewById(R.id.tv_phonenum_merchintinfo);
         iv_picture = (ImageView)findViewById(R.id.iv_image_merchintinfo);
         tv_goods = (TextView)findViewById(R.id.tv_togoods_merchintinfo);
+
+        tv_merchintname.setText(merchint.getAccountname());
+        tv_merchintplace.setText(merchint.getAccountaddress());
+        tv_worktime.setText(merchint.getOpeningtime()+"--"+merchint.getClosingtime());
+
     }
 }

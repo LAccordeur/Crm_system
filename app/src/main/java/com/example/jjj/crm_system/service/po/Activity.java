@@ -1,6 +1,8 @@
 package com.example.jjj.crm_system.service.po;
 
-public class Activity {
+import java.io.Serializable;
+
+public class Activity implements Serializable {
     private Integer activityid;
 
     private String activityname;
@@ -16,6 +18,10 @@ public class Activity {
     private Boolean activitystate;
 
     private byte[] activitypic;
+    private String activityImageUrl = "http://img.taopic.com/uploads/allimg/140817/235030-140QFQ91875.jpg";
+
+    public String getActivityImageUrl(){return activityImageUrl;}
+    public void setActivityImageUrl(String url){this.activityImageUrl = url;}
 
     public Integer getActivityid() {
         return activityid;

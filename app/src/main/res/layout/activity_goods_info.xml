@@ -27,6 +27,24 @@
             android:textSize="24dp"
             android:textColor="#ffffff"
             android:text="商品浏览"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:textSize="35dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textColor="@drawable/selector_tab_text_merchant"
+            android:cursorVisible="false"
+            android:clickable="true"
+            android:layout_marginRight="15dp"
+            android:id="@+id/iv_add_goodsinfo"/>
 
     </RelativeLayout>
+    <com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rl_top_goodsinfo"
+        android:id="@+id/ptr_goods_goodsinfo"></com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshListView>
 </RelativeLayout>

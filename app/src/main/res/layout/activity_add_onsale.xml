@@ -70,6 +70,7 @@
                 android:layout_alignTop="@id/iv_pic_addonsale"
                 android:layout_toRightOf="@id/iv_pic_addonsale"
                 android:text="上传图片"
+                android:id="@+id/bt_uploadpic_addonsale"
                 android:background="@drawable/shape_button"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="15dp"/>
@@ -136,6 +137,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_button"
                 android:layout_below="@id/et_endtime_addonsale"
+                android:id="@+id/bt_ok_addonsale"
                 android:layout_centerHorizontal="true"
                 android:text="点击发布"
                 android:layout_margin="10dp"/>

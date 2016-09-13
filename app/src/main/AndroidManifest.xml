@@ -66,8 +66,24 @@
             android:name=".activity.OnsaleInfoActivity"
             android:label="OnsaleInfoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.AddOnsaleActivity"
+        <activity
+            android:name=".activity.AddOnsaleActivity"
             android:label="OnsaleInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.AddGoodsActivity"
+            android:label="AddGoodsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.GoodsEditActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.MemberInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.AddMemberActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.MemberDetailActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 

@@ -4,7 +4,8 @@
     android:layout_height="match_parent">
     <com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshListView>
+        android:layout_height="match_parent"
+        android:id="@+id/ptr_onsaleList_account"></com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshListView>
     <com.example.jjj.crm_system.ui.view.CircleImageView
         android:layout_width="60dp"
         android:layout_height="60dp"

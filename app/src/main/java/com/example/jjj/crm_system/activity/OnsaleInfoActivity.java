@@ -6,13 +6,14 @@ import android.widget.TextView;
 
 import com.example.jjj.crm_system.R;
 import com.example.jjj.crm_system.domain.CustomerOnsaleObject;
+import com.example.jjj.crm_system.service.po.Activity;
 import com.example.jjj.crm_system.ui.Base.BaseActivity;
 import com.example.jjj.crm_system.utils.ActivityUtil;
 import com.example.jjj.crm_system.utils.ImageLoader;
 
 public class OnsaleInfoActivity extends BaseActivity {
     private ImageView iv_back;
-    private CustomerOnsaleObject onsaleObject;
+    private Activity onsaleObject;
     private TextView tv_onsalename;
     private ImageView iv_onsale;
     private TextView tv_starttime;
@@ -25,7 +26,7 @@ public class OnsaleInfoActivity extends BaseActivity {
      */
     @Override
     protected void init() {
-        onsaleObject = (CustomerOnsaleObject)getIntent().getSerializableExtra("onsale_info");
+        onsaleObject = (Activity)getIntent().getSerializableExtra("onsale_info");
         imageLoader = ImageLoader.getInstance(getBaseContext());
 
     }
@@ -65,9 +66,9 @@ public class OnsaleInfoActivity extends BaseActivity {
         tv_endtime = (TextView)findViewById(R.id.tv_endtime_onsaleinfo);
         iv_onsale = (ImageView)findViewById(R.id.iv_image_onsaleinfo);
 
-        tv_onsalename.setText(onsaleObject.getOnsaleName());
-        tv_starttime.setText(onsaleObject.getOnsaleStartTime());
-        tv_endtime.setText(onsaleObject.getOnsaleEndTime());
-        imageLoader.loadImage(onsaleObject.getOnsaleImageUrl(),iv_onsale);
+        tv_onsalename.setText(onsaleObject.getActivityname());
+        tv_starttime.setText(onsaleObject.getActivitystarttime());
+        tv_endtime.setText(onsaleObject.getActivitycuttime());
+        imageLoader.loadImage(onsaleObject.getActivityImageUrl(),iv_onsale);
     }
 }
