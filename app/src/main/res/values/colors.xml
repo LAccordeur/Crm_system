@@ -4,4 +4,16 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorGoodstop">#fa9e26</color>
+
+    <color name="myWhite">#ffffff</color>
+    <color name="myBlack">#000000</color>
+    <color name="myGray">#999999</color>
+    <color name="buttonOrange">#FF9800</color>
+    <color name="background">#dfdddd</color>
+    <color name="backgroundWhite">#f2f5f8</color>
+    <color name="myRed">#FF6666</color>
+    <color name="myGreen">#4c8888</color>
+    <color name="green_faint">#07e235</color>
+    <color name="myBlue">#abc3ee</color>
+    <color name="green_1">#b3d496</color>
 </resources>

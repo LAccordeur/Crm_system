@@ -52,6 +52,10 @@ public class MerchantloginActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MerchantloginActivity.this,MerchantActivity.class);
+
+
+                Integer MerchintId = 0;
+                intent.putExtra("MerchintId",MerchintId);
                 startActivity(intent);
             }
         });

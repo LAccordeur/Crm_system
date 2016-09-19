@@ -9,9 +9,14 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.jjj.crm_system.R;
+import com.example.jjj.crm_system.net.NetTask;
+import com.example.jjj.crm_system.service.GoodsService;
 import com.example.jjj.crm_system.service.po.Goods;
 import com.example.jjj.crm_system.ui.Base.BaseActivity;
+import com.example.jjj.crm_system.ui.dialog.MyProgressDialog;
 import com.example.jjj.crm_system.utils.ActivityUtil;
+
+import org.json.JSONObject;
 
 public class AddGoodsActivity extends BaseActivity {
     private ImageView iv_back;
@@ -21,6 +26,8 @@ public class AddGoodsActivity extends BaseActivity {
     private String goodName,goodDetails;
     private Float goodPrice;
 
+
+    private MyProgressDialog myProgressDialog;
 
     /**
      * 加载UI前的预初始化
@@ -81,10 +88,81 @@ public class AddGoodsActivity extends BaseActivity {
                     return;
                 }
 
-                Goods newGood = new Goods();
+                final Goods newGood = new Goods();
                 newGood.setGoodsname(goodName);
                 newGood.setGoodsmoney(goodPrice);
                 newGood.setGoodsdetail(goodDetails);
+
+                new NetTask(getBaseContext()){
+                    /**
+                     * 异步任务执行前的预处理
+                     */
+                    /**
+                     * 异步任务执行前的预处理
+                     */
+                    @Override
+                    protected void onStart() {
+                        super.onStart();
+                        myProgressDialog.show();
+                    }
+
+                    /**
+                     * 加载数据
+                     *
+                     * @return
+                     */
+                    @Override
+                    protected JSONObject onLoad() {
+                        try {
+                            GoodsService.insertGoods(newGood);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        return null;
+                    }
+
+                    /**
+                     * 请求数据成功后的处理
+                     *
+                     * @param jsonObject
+                     * @throws Exception
+                     */
+                    @Override
+                    protected void onSuccess(JSONObject jsonObject) throws Exception {
+                        myProgressDialog.dismiss();
+                        Toast.makeText(getBaseContext(),"上传成功！",Toast.LENGTH_LONG).show();
+
+                    }
+
+                    /**
+                     * 返回错误时的处理逻辑
+                     *
+                     * @param errorCode
+                     * @param errorStr
+                     */
+                    @Override
+                    protected void onError(int errorCode, String errorStr) {
+                        super.onError(errorCode, errorStr);
+                    }
+
+                    /**
+                     * 请求失败的处理逻辑
+                     */
+                    @Override
+                    protected void onFail() {
+                        super.onFail();
+
+                    }
+
+                    /**
+                     * 完成后的处理逻辑
+                     */
+                    @Override
+                    protected void onFinish() {
+                        super.onFinish();
+                        myProgressDialog.dismiss();
+                    }
+                }.execute();
 
 
             }

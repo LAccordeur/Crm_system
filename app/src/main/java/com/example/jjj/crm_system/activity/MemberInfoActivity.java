@@ -13,11 +13,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.jjj.crm_system.R;
+import com.example.jjj.crm_system.net.NetTask;
 import com.example.jjj.crm_system.service.BonusPointService;
 import com.example.jjj.crm_system.service.CustomerService;
 import com.example.jjj.crm_system.service.po.Customer;
 import com.example.jjj.crm_system.ui.Base.BaseActivity;
+import com.example.jjj.crm_system.ui.dialog.MyProgressDialog;
 import com.example.jjj.crm_system.utils.ActivityUtil;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +33,7 @@ public class MemberInfoActivity extends BaseActivity{
     private memberAdapter adapter;
     private ListView lv_member;
 
+    private MyProgressDialog myProgressDialog;
     /**
      * 加载UI前的预初始化
      */
@@ -96,11 +101,74 @@ public class MemberInfoActivity extends BaseActivity{
     }
 
     private void initMemberlist(){
-        try {
+       /* try {
             memberlist = BonusPointService.getCustomersCreditByOrder();
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
+        new NetTask(getBaseContext()){
+            /**
+             * 异步任务执行前的预处理
+             */
+            @Override
+            protected void onStart() {
+                super.onStart();
+                myProgressDialog.show();
+            }
+
+            /**
+             * 加载数据
+             *
+             * @return
+             */
+            @Override
+            protected JSONObject onLoad() {
+                try {
+                    memberlist = BonusPointService.getCustomersCreditByOrder();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            /**
+             * 请求数据成功后的处理
+             *
+             * @param jsonObject
+             * @throws Exception
+             */
+            @Override
+            protected void onSuccess(JSONObject jsonObject) throws Exception {
+
+            }
+
+            /**
+             * 返回错误时的处理逻辑
+             *
+             * @param errorCode
+             * @param errorStr
+             */
+            @Override
+            protected void onError(int errorCode, String errorStr) {
+                super.onError(errorCode, errorStr);
+            }
+
+            /**
+             * 请求失败的处理逻辑
+             */
+            @Override
+            protected void onFail() {
+                super.onFail();
+            }
+
+            /**
+             * 完成后的处理逻辑
+             */
+            @Override
+            protected void onFinish() {
+                super.onFinish();
+            }
+        }.execute();
     }
 
     private class memberAdapter extends BaseAdapter{

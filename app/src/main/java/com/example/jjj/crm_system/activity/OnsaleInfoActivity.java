@@ -8,6 +8,7 @@ import com.example.jjj.crm_system.R;
 import com.example.jjj.crm_system.domain.CustomerOnsaleObject;
 import com.example.jjj.crm_system.service.po.Activity;
 import com.example.jjj.crm_system.ui.Base.BaseActivity;
+import com.example.jjj.crm_system.ui.dialog.MyProgressDialog;
 import com.example.jjj.crm_system.utils.ActivityUtil;
 import com.example.jjj.crm_system.utils.ImageLoader;
 
@@ -20,6 +21,7 @@ public class OnsaleInfoActivity extends BaseActivity {
     private TextView tv_endtime;
 
     private ImageLoader imageLoader;
+    private MyProgressDialog myProgressDialog;
 
     /**
      * 加载UI前的预初始化

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
    <TableRow
        android:layout_width="wrap_content"
        android:layout_height="wrap_content">
@@ -17,6 +18,7 @@
            android:layout_height="wrap_content"
            android:hint="支持后四位"
            android:layout_marginTop="20dp"
+           android:layout_marginLeft="10dp"
            android:textSize="25dp"/>
    </TableRow>
     <TableRow
@@ -80,32 +82,17 @@
     </RelativeLayout>
     <RelativeLayout
         android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
         android:background="@drawable/table_shape"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:id="@+id/goods_list">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="商品一"
-            android:id="@+id/goods1"
-            android:textSize="20dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/goods1"
-            android:text="单价"
-            android:textSize="20dp"
-            android:layout_marginLeft="170dp"
-            android:id="@+id/price"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="*1"
-            android:textSize="20dp"
-            android:layout_toRightOf="@+id/price"/>
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_goods_score"
+            android:id="@+id/lv_goods_score"></ListView>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="wrap_content"

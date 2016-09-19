@@ -48,6 +48,7 @@ public class HttpUtil
 						if (httpResponse.getStatusLine()
 								.getStatusCode() == 200)
 						{
+
 							// 获取服务器响应字符串
 							String result = EntityUtils
 									.toString(httpResponse.getEntity());

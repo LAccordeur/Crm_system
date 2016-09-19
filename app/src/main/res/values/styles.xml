@@ -57,5 +57,24 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>
     </style>
+    <style name="MyBaseDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@drawable/shape_base_dialog</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="MyProgressDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@drawable/shape_progress_dialog</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
 
 </resources>
