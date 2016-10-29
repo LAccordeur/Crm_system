@@ -31,6 +31,12 @@ public class MerchantActivity extends BaseActivity {
     private MyPagerAdapter adapter;
 
 
+
+    private Integer merchint_id;
+    public Integer getMerchint_id() {
+        return merchint_id;
+    }
+
     @Override
     protected int getRootView() {
         return R.layout.activity_merchant;
@@ -38,6 +44,9 @@ public class MerchantActivity extends BaseActivity {
 
     @Override
     protected void init() {
+
+        merchint_id = getIntent().getIntExtra("MerchintId",0);
+        System.out.println("MerchintActivty started!"+"Merchint_id-->"+merchint_id);
         fragments = new ArrayList<BaseFragment>();
         fragments.add(0,new HomeFragment());
         fragments.add(1,new AccountFragment());
@@ -134,6 +143,7 @@ public class MerchantActivity extends BaseActivity {
                 break;
         }
     }
+
     private class MyPagerAdapter extends FragmentPagerAdapter {
         public MyPagerAdapter(android.support.v4.app.FragmentManager fm) {
             super(fm);

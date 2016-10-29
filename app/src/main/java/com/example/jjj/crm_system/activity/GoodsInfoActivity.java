@@ -48,7 +48,8 @@ public class GoodsInfoActivity extends BaseActivity {
         Bundle bundle = new Bundle();
         bundle = getIntent().getExtras();
         intent_id = bundle.getInt("intent_id");
-        //System.out.println("--->-跳转信息--->"+intent_id);
+        System.out.println("--->-跳转信息--->"+intent_id+"getBaseContext = "+baseContext);
+
 
 
 
@@ -88,6 +89,7 @@ public class GoodsInfoActivity extends BaseActivity {
             @Override
             public void onRefresh(PullToRefreshBase<ListView> refreshView) {
                 initListview();
+                ptr_goods.onRefreshComplete();
 
             }
         });
@@ -98,6 +100,8 @@ public class GoodsInfoActivity extends BaseActivity {
      */
     @Override
     protected void initData() {
+
+        myProgressDialog = new MyProgressDialog(baseContext);
         iv_back = (ImageView)findViewById(R.id.iv_back_goodsinfo);
         tv_add = (TextView)findViewById(R.id.iv_add_goodsinfo);
         ptr_goods = (PullToRefreshListView)findViewById(R.id.ptr_goods_goodsinfo);
@@ -109,75 +113,36 @@ public class GoodsInfoActivity extends BaseActivity {
     }
 
     private void initGoodsList(){
-        /*
-        try {
-            goodsList = GoodsService.getGoodsInf();
-        }catch (Exception e){
-            e.printStackTrace();
-        }*/
-        new NetTask(getBaseContext()){
-            /**
-             * 异步任务执行前的预处理
-             */
+
+        new NetTask(GoodsInfoActivity.this){
+
             @Override
             protected void onStart() {
                 super.onStart();
                 myProgressDialog.show();
             }
 
-            /**
-             * 请求数据成功后的处理
-             *
-             * @param jsonObject
-             * @throws Exception
-             */
             @Override
             protected void onSuccess(JSONObject jsonObject) throws Exception {
                 myProgressDialog.dismiss();
             }
 
-            /**
-             * 返回错误时的处理逻辑
-             *
-             * @param errorCode
-             * @param errorStr
-             */
-            @Override
-            protected void onError(int errorCode, String errorStr) {
-                super.onError(errorCode, errorStr);
-            }
-
-            /**
-             * 请求失败的处理逻辑
-             */
-            @Override
-            protected void onFail() {
-                super.onFail();
-
-            }
-
-            /**
-             * 完成后的处理逻辑
-             */
             @Override
             protected void onFinish() {
                 super.onFinish();
                 myProgressDialog.dismiss();
             }
 
-            /**
-             * 加载数据
-             *
-             * @return
-             */
             @Override
             protected JSONObject onLoad() {
+                JSONObject jsonObject = new JSONObject();
                 try {
                     goodsList = GoodsService.getGoodsInf();
+                    jsonObject.put("StateCode",1);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                return null;
+                return jsonObject;
             }
         }.execute();
     }

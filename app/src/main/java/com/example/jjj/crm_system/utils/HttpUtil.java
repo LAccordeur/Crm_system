@@ -24,7 +24,7 @@ public class HttpUtil
 	// 创建HttpClient对象
 	public static HttpClient httpClient = new DefaultHttpClient();
 	public static final String BASE_URL =
-			"http://192.168.1.237:8080/Crm_system/";
+			"http://123.207.88.18:8080/Crm_system/";
 	/**
 	 *
 	 * @param url 发送请求的URL

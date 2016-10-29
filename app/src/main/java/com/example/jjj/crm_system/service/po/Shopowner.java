@@ -4,9 +4,10 @@ package com.example.jjj.crm_system.service.po;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Shopowner {
+public class Shopowner implements Serializable {
     private Integer accountid;
 
     private String accountname;

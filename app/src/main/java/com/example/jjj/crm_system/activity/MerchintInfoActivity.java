@@ -38,19 +38,14 @@ public class MerchintInfoActivity extends BaseActivity {
      */
     @Override
     protected void init() {
+        merchint = (Shopowner) getIntent().getSerializableExtra("MerchintInfo");
         Bundle bundle = new Bundle();
         bundle = getIntent().getExtras();
         Intent_id = bundle.getInt("intent_id");
         merchint.setAccountid(1);
 
-/*
-        try {
-            merchint = ShopownerService.getShopownerInf(null);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-*/
-        getMerchintInfo();
+
+
 
 
     }
@@ -94,71 +89,7 @@ public class MerchintInfoActivity extends BaseActivity {
      * 请求数据，设置UI
      */
 
-    private void getMerchintInfo(){
-        new NetTask(getBaseContext()){
-            /**
-             * 异步任务执行前的预处理
-             */
-            @Override
-            protected void onStart() {
-                super.onStart();
-                myProgressDialog.show();
-            }
 
-            /**
-             * 加载数据
-             *
-             * @return
-             */
-            @Override
-            protected JSONObject onLoad() {
-                try {
-                    merchint = ShopownerService.getShopownerInf(merchint.getAccountid().toString());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-
-            /**
-             * 请求数据成功后的处理
-             *
-             * @param jsonObject
-             * @throws Exception
-             */
-            @Override
-            protected void onSuccess(JSONObject jsonObject) throws Exception {
-
-            }
-
-            /**
-             * 返回错误时的处理逻辑
-             *
-             * @param errorCode
-             * @param errorStr
-             */
-            @Override
-            protected void onError(int errorCode, String errorStr) {
-                super.onError(errorCode, errorStr);
-            }
-
-            /**
-             * 请求失败的处理逻辑
-             */
-            @Override
-            protected void onFail() {
-                super.onFail();
-            }
-
-            /**
-             * 完成后的处理逻辑
-             */
-            @Override
-            protected void onFinish() {
-                super.onFinish();
-            }
-        }.execute();
-    }
 
 
     //需要商家电话信息

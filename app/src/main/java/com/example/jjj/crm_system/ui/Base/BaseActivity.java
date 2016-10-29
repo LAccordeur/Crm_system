@@ -1,20 +1,35 @@
 package com.example.jjj.crm_system.ui.Base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
 import com.example.jjj.crm_system.utils.ActivityUtil;
 
+import org.json.JSONObject;
+
 /**
  * Created by jjj on 2016/5/19 0019.
  */
 public abstract class BaseActivity extends AppCompatActivity {
+    protected Context baseContext;
+    private static JSONObject object;//静态变量保存信息用于与fragment交互数据
+
+    public static JSONObject getObject() {
+        return object;
+    }
+
+    public static void setObject(JSONObject object) {
+        BaseActivity.object = object;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         ActivityUtil.addActivity(this);
+        baseContext = this;
         init();
         setContentView(getRootView());
 

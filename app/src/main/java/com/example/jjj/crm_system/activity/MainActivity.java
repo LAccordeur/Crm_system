@@ -32,6 +32,7 @@ public class MainActivity extends BaseActivity {
     private Button bt_merchantlogin_main;
     private Button bt_customerlogin_main;
 
+
     @Override
     public int getRootView(){
         return R.layout.activity_main;
@@ -63,6 +64,7 @@ public class MainActivity extends BaseActivity {
     public void initData(){
         bt_customerlogin_main = (Button)findViewById(R.id.bt_customerlogin_main);
         bt_merchantlogin_main = (Button)findViewById(R.id.bt_merchantlogin_main);
+
 
     }
 

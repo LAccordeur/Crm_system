@@ -110,11 +110,11 @@ public abstract class NetTask {
 
         @Override
         public void run() {
-            if (jsonObject == null) {
-                onFail();
-                onFinish();
+           if (jsonObject == null) {
+               onFail();
+               onFinish();
 
-            }
+           }
             try {
 
                 if (jsonObject.getInt("StateCode") == 1||jsonObject.getInt("StateCode")==0) {

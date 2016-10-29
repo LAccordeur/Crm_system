@@ -3,11 +3,15 @@
     android:layout_width="wrap_content"
     android:background="@drawable/layout_border"
     android:layout_height="wrap_content">
+
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@mipmap/ic_launcher"
-        android:id="@+id/iv_png_onsaleitem"/>
+        android:id="@+id/iv_png_onsaleitem"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,6 +58,7 @@
         android:id="@+id/tv_introdaction_onsaleitem"
         android:text="活动简介区域"
         android:layout_above="@id/huodongqixian"/>
+
 
 
 

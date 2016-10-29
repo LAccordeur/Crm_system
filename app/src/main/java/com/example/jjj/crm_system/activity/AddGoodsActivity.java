@@ -93,7 +93,7 @@ public class AddGoodsActivity extends BaseActivity {
                 newGood.setGoodsmoney(goodPrice);
                 newGood.setGoodsdetail(goodDetails);
 
-                new NetTask(getBaseContext()){
+                new NetTask(baseContext){
                     /**
                      * 异步任务执行前的预处理
                      */
@@ -131,6 +131,7 @@ public class AddGoodsActivity extends BaseActivity {
                     protected void onSuccess(JSONObject jsonObject) throws Exception {
                         myProgressDialog.dismiss();
                         Toast.makeText(getBaseContext(),"上传成功！",Toast.LENGTH_LONG).show();
+                        ActivityUtil.finishActivty();
 
                     }
 
@@ -175,6 +176,7 @@ public class AddGoodsActivity extends BaseActivity {
      */
     @Override
     protected void initData() {
+        myProgressDialog = new MyProgressDialog(baseContext);
         iv_back = (ImageView)findViewById(R.id.iv_back_addgoods);
         iv_good = (ImageView)findViewById(R.id.iv_pic_addgoods);
         bt_uploadpic = (Button)findViewById(R.id.bt_uploadpic_addgoods);

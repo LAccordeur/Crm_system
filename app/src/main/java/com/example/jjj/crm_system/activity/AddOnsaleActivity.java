@@ -105,7 +105,7 @@ public class AddOnsaleActivity extends BaseActivity {
                 newActivity.setActivityname(name);
                 newActivity.setActivitystarttime(starttime);
 
-                new NetTask(getBaseContext()){
+                new NetTask(baseContext){
                     /**
                      * 异步任务执行前的预处理
                      */
@@ -183,6 +183,8 @@ public class AddOnsaleActivity extends BaseActivity {
      */
     @Override
     protected void initData() {
+        myProgressDialog = new MyProgressDialog(baseContext);
+
         iv_back = (ImageView)findViewById(R.id.iv_back_addonsale);
         et_name = (EditText)findViewById(R.id.et_onsaledetail_addonsale);
         et_intro = (EditText)findViewById(R.id.et_onsaledetail_addonsale);

@@ -75,6 +75,7 @@
             android:layout_height="25dp"
             android:layout_toRightOf="@+id/activity_chooser_view_content"
             android:text="添加>"
+            android:onClick="selectGoods"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:gravity="bottom"
