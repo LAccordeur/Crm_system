@@ -72,7 +72,7 @@
                 android:layout_below="@id/tv_membernum"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:layout_marginBottom="5dp"></ListView>
+                android:layout_marginBottom="5dp"/>
         </RelativeLayout>
     </com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshScrollView>
 

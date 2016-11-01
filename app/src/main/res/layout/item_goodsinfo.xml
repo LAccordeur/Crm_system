@@ -2,16 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content" android:layout_height="wrap_content">
     <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:src="@mipmap/ic_launcher"
         android:id="@+id/iv_pic_goodsitem"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24dp"
+        android:textSize="18dp"
         android:id="@+id/tv_name_goodsitem"
+        android:textColor="#27a425"
         android:text="商品名"
         android:layout_toRightOf="@id/iv_pic_goodsitem"
         android:layout_margin="5dp"/>
@@ -19,7 +20,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="价格"
-        android:textSize="24dp"
+        android:textColor="#27a425"
+        android:textSize="18dp"
         android:id="@+id/tv_price_goodsitem"
         android:layout_below="@id/tv_name_goodsitem"
         android:layout_toRightOf="@id/iv_pic_goodsitem"
@@ -29,8 +31,9 @@
         android:layout_height="wrap_content"
         android:minLines="2"
         android:id="@+id/tv_details_goodsitem"
-        android:textSize="24dp"
+        android:textSize="18dp"
         android:text="商品备注"
+        android:textColor="#27a425"
         android:layout_alignBottom="@id/iv_pic_goodsitem"
         android:gravity="top"
         android:layout_margin="5dp"

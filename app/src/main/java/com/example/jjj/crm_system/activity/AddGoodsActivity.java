@@ -91,6 +91,7 @@ public class AddGoodsActivity extends BaseActivity {
                 final Goods newGood = new Goods();
                 newGood.setGoodsname(goodName);
                 newGood.setGoodsmoney(goodPrice);
+                newGood.setGoodsstorage(100);
                 newGood.setGoodsdetail(goodDetails);
 
                 new NetTask(baseContext){
@@ -113,12 +114,19 @@ public class AddGoodsActivity extends BaseActivity {
                      */
                     @Override
                     protected JSONObject onLoad() {
+                        JSONObject jsonObject = new JSONObject();
+
                         try {
-                            GoodsService.insertGoods(newGood);
+                            boolean flag = GoodsService.insertGoods(newGood);
+                            if(flag){
+                                jsonObject.put("StateCode",1);
+                            }
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        return null;
+
+                        return jsonObject;
                     }
 
                     /**
@@ -130,39 +138,11 @@ public class AddGoodsActivity extends BaseActivity {
                     @Override
                     protected void onSuccess(JSONObject jsonObject) throws Exception {
                         myProgressDialog.dismiss();
-                        Toast.makeText(getBaseContext(),"上传成功！",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getBaseContext(),"上传成功！",Toast.LENGTH_SHORT).show();
                         ActivityUtil.finishActivty();
 
                     }
 
-                    /**
-                     * 返回错误时的处理逻辑
-                     *
-                     * @param errorCode
-                     * @param errorStr
-                     */
-                    @Override
-                    protected void onError(int errorCode, String errorStr) {
-                        super.onError(errorCode, errorStr);
-                    }
-
-                    /**
-                     * 请求失败的处理逻辑
-                     */
-                    @Override
-                    protected void onFail() {
-                        super.onFail();
-
-                    }
-
-                    /**
-                     * 完成后的处理逻辑
-                     */
-                    @Override
-                    protected void onFinish() {
-                        super.onFinish();
-                        myProgressDialog.dismiss();
-                    }
                 }.execute();
 
 

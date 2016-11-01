@@ -132,6 +132,16 @@
                 android:layout_margin="10dp"
                 android:id="@+id/tv_consumedetail"
                 />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/tv_consumedetail"
+                android:id="@+id/tv_refresh_memberdetail"
+                android:text="刷新>"
+                android:layout_alignParentRight="true"
+                android:textSize="24dp"
+                android:textColor="@drawable/textcolor_1"
+                android:layout_marginRight="10dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
@@ -140,7 +150,7 @@
                 <ListView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/lv_consumedetail_memberdeail"></ListView>
+                    android:id="@+id/lv_consumedetail_memberdeail"/>
             </LinearLayout>
         </RelativeLayout>
 

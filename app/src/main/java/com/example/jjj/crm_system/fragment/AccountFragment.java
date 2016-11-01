@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.jjj.crm_system.R;
 import com.example.jjj.crm_system.activity.AddOnsaleActivity;
+import com.example.jjj.crm_system.activity.OnsaleInfoActivity;
 import com.example.jjj.crm_system.net.NetTask;
 import com.example.jjj.crm_system.service.ActivityService;
 import com.example.jjj.crm_system.service.po.Activity;
@@ -20,6 +21,7 @@ import com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshBase;
 import com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshListView;
 import com.example.jjj.crm_system.ui.view.CircleImage;
 import com.example.jjj.crm_system.ui.view.CircleImageView;
+import com.example.jjj.crm_system.utils.ImageLoader;
 
 import org.json.JSONObject;
 
@@ -82,8 +84,8 @@ public class AccountFragment extends BaseFragment {
     //设置listview
     private void initListView(){
         initList();
-        adapter = new MyAdapter(activityList,getContext());
-        ptr_onsaleList.setAdapter(adapter);
+
+
 
     }
     //获取活动的list
@@ -116,7 +118,8 @@ public class AccountFragment extends BaseFragment {
              */
             @Override
             protected void onSuccess(JSONObject jsonObject) throws Exception {
-
+                adapter = new MyAdapter(activityList,getContext());
+                ptr_onsaleList.setAdapter(adapter);
             }
         }.execute();
     }
@@ -132,10 +135,21 @@ public class AccountFragment extends BaseFragment {
     private class MyAdapter extends BaseAdapter{
         private List<Activity> list;
         private Context context;
+        private ImageLoader imageLoader;
+        private String[] urls = {
+                "http://img3.imgtn.bdimg.com/it/u=1155943206,1987444143&fm=21&gp=0.jpg",
+                "http://img2.imgtn.bdimg.com/it/u=1781372704,1641418402&fm=21&gp=0.jpg",
+                "http://img5.imgtn.bdimg.com/it/u=3864008374,840659723&fm=21&gp=0.jpg",
+                "http://img4.imgtn.bdimg.com/it/u=105076888,1508232468&fm=21&gp=0.jpg",
+                "http://img4.imgtn.bdimg.com/it/u=120685712,350781314&fm=21&gp=0.jpg",
+                "http://img5.imgtn.bdimg.com/it/u=3476470103,3834397702&fm=21&gp=0.jpg",
+                "http://img1.imgtn.bdimg.com/it/u=1079672554,2664045843&fm=21&gp=0.jpg",
+        };
 
         public MyAdapter(List<Activity> list, Context context) {
             this.list = list;
             this.context = context;
+            imageLoader = ImageLoader.getInstance(context);
         }
 
         @Override
@@ -154,17 +168,32 @@ public class AccountFragment extends BaseFragment {
         }
 
         @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
+        public View getView(final int i, View view, ViewGroup viewGroup) {
             View Myview = LayoutInflater.from(getContext()).inflate(R.layout.item_onsale,null);
             ImageView iv = (ImageView) Myview.findViewById(R.id.iv_png_onsaleitem);
             TextView  tv_name = (TextView) Myview.findViewById(R.id.tv_onsalename_onsaleitem);
             TextView tv_detail = (TextView) Myview.findViewById(R.id.tv_details_onsaleitme);
+            TextView tv_intro = (TextView) Myview.findViewById(R.id.tv_introdaction_onsaleitem);
             TextView tv_time = (TextView) Myview.findViewById(R.id.tv_onsaletime_onsaleitem);
 
+            imageLoader.loadImage(urls[i],iv);
             tv_name.setText(list.get(i).getActivityname());
-            tv_detail.setText(list.get(i).getActivitydetail());
+            tv_intro.setText(list.get(i).getActivitydetail());
             tv_time.setText(list.get(i).getActivitystarttime()+" - - "+list.get(i).getActivitycuttime());
 
+
+            final Activity onsaleObject = list.get(i);
+
+            tv_detail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    System.out.println("tv_detail Clicked!");
+                    Intent intent = new Intent(context, OnsaleInfoActivity.class);
+                    intent.putExtra("onsale_info",onsaleObject);
+                    intent.putExtra("imageUrl",urls[i]);
+                    startActivity(intent);
+                }
+            });
 
             return Myview;
         }

@@ -2,6 +2,7 @@ package com.example.jjj.crm_system.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,19 +12,27 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.jjj.crm_system.activity.MerchintInfoActivity;
 import com.example.jjj.crm_system.activity.OnsaleInfoActivity;
 import com.example.jjj.crm_system.domain.CustomerOnsaleObject;
 import com.example.jjj.crm_system.R;
 
+import com.example.jjj.crm_system.net.NetTask;
+import com.example.jjj.crm_system.service.ActivityService;
 import com.example.jjj.crm_system.service.CustomerService;
+import com.example.jjj.crm_system.service.ShopownerService;
 import com.example.jjj.crm_system.service.po.Activity;
+import com.example.jjj.crm_system.service.po.Shopowner;
 import com.example.jjj.crm_system.ui.Base.BaseFragment;
+import com.example.jjj.crm_system.ui.dialog.MyProgressDialog;
 import com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshBase;
 import com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshListView;
 import com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshScrollView;
 import com.example.jjj.crm_system.utils.ImageLoader;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,9 +55,14 @@ public class CustomerHomeFragment extends BaseFragment {
     private CustomerHomeAdapter adpter;
     private List<Activity> onsaleList;
     private com.example.jjj.crm_system.ui.view.CircleImageView iv_storepng_customerhome;
+    private MyProgressDialog myProgressDialog;
+    private Shopowner shopownerInfo;
 
     @Override
     protected void initData(View view) {
+        onsaleList = new ArrayList<Activity>();
+        myProgressDialog = new MyProgressDialog(getContext());
+        initOnsaleList();
         tv_storename_customerhome = (TextView)view.findViewById(R.id.tv_storename_coustomerhome);
         tv_place_customerhome = (TextView)view.findViewById(R.id.tv_place_customerhome);
         tv_others_customerhome = (TextView)view.findViewById(R.id.tv_others_customerhome);
@@ -58,9 +72,13 @@ public class CustomerHomeFragment extends BaseFragment {
         iv_storepng_customerhome = (com.example.jjj.crm_system.ui.view.CircleImageView)view.findViewById(R.id.iv_storepng_customerhome);
         ptr_customerhome = (com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshScrollView)view.findViewById(R.id.ptr_customerhome);
         ptr_customerhome.setPullToRefreshOverScrollEnabled(false);
-        onsaleList = new ArrayList<Activity>();
-        initOnsaleList();
+
+
         initListView();
+        tv_storename_customerhome.setText(shopownerInfo.getAccountname());
+        tv_others_customerhome.setText(shopownerInfo.getAccountdetail());
+        tv_worktime_customerhome.setText(shopownerInfo.getOpeningtime()+"--"+shopownerInfo.getClosingtime());
+        tv_place_customerhome.setText(shopownerInfo.getAccountaddress());
     }
 
     @Override
@@ -90,9 +108,7 @@ public class CustomerHomeFragment extends BaseFragment {
         lv_onsale_customerhome.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
             public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-                //onsaleList.add(new Activity());
-                //adpter = new CustomerHomeAdapter(onsaleList,getActivity().getApplicationContext());
-                //lv_onsale_customerhome.setAdapter(adpter);
+
                 initListView();
                 lv_onsale_customerhome.onRefreshComplete();
 
@@ -116,20 +132,34 @@ public class CustomerHomeFragment extends BaseFragment {
         lv_onsale_customerhome.setAdapter(adpter);
     }
     private void initOnsaleList(){
+        new NetTask(getContext()){
 
-        try {
+            @Override
+            protected void onStart() {
+                myProgressDialog.show();
+                super.onStart();
+            }
 
-            onsaleList = CustomerService.seeAcitvityInf();
-            //onsaleList.add(new Activity());
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+            @Override
+            protected JSONObject onLoad() {
+                JSONObject jsonObject = new JSONObject();
 
+                try {
+                    onsaleList = ActivityService.getActivityInfo();
+                    shopownerInfo = ShopownerService.getShopownerInf("1");
+                    jsonObject.put("StateCode",1);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-        //for(int i = 0;i < 5;i++){
-          //  onsaleList.add(i,new Activity());
-            //System.out.println("插入第"+i+"个");
-        //}
+                return jsonObject;
+            }
+
+            @Override
+            protected void onSuccess(JSONObject jsonObject) throws Exception {
+                 myProgressDialog.dismiss();
+            }
+        }.execute();
     }
 
 

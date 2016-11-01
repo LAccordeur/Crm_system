@@ -12,6 +12,9 @@ import com.example.jjj.crm_system.ui.view.CircleImage;
 import com.example.jjj.crm_system.ui.view.CircleImageView;
 import com.example.jjj.crm_system.utils.ImageLoader;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by jjj on 2016/7/11 0011.
  */
@@ -26,6 +29,7 @@ public class CustomerIndividualFragment extends BaseFragment {
     private CircleImageView iv_portrait_customerindividual;
     private ImageLoader imageLoader;
     private PullToRefreshListView lv;
+    private String phonenum;
 
     @Override
     protected int getRootView() {
@@ -40,6 +44,14 @@ public class CustomerIndividualFragment extends BaseFragment {
     @Override
     protected void init() {
         imageLoader = ImageLoader.getInstance(this.getContext());
+        JSONObject jsonObject = myActivity.getObject();
+        if (!(jsonObject.equals("")||jsonObject==null)){
+            try {
+                phonenum = jsonObject.getString("phonenum");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
@@ -50,9 +62,13 @@ public class CustomerIndividualFragment extends BaseFragment {
         lv = (PullToRefreshListView) view.findViewById(R.id.lv_accountinfo_coustomerindividual);
         iv_portrait_customerindividual = (CircleImageView) view.findViewById(R.id.iv_portrait_customerindividual);
 
+        if (phonenum!=null||!phonenum.equals("")){
+            initCustmorInfo(phonenum);
+        }
+    }
 
-
-
+    private void initCustmorInfo(String phonenum){
 
     }
+
 }
