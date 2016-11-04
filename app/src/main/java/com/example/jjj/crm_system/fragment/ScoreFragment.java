@@ -59,7 +59,6 @@ public class ScoreFragment extends BaseFragment {
     @Override
     protected void init() {
         goodsMap = new HashMap<>();
-
     }
 
     @Override
@@ -86,8 +85,11 @@ public class ScoreFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 phone = Integer.parseInt(et_phone.getText().toString().trim());
-                //money = Integer.parseInt(et_money.getText().toString());
-                //point = Integer.parseInt(et_point.getText().toString());
+                money = Integer.parseInt(et_money.getText().toString().trim());
+                point = Integer.parseInt(et_point.getText().toString().trim());
+                if (et_phone.getText()==null||et_phone.getText().equals("")){
+                    Toast.makeText(getContext(),"请输入电话号码！",Toast.LENGTH_SHORT).show();
+                }
                 new NetTask(getContext()){
 
                     @Override

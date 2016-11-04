@@ -1,5 +1,8 @@
 package com.example.jjj.crm_system.activity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +28,7 @@ public class AddGoodsActivity extends BaseActivity {
     private EditText et_name,et_price,et_details;
     private String goodName,goodDetails;
     private Float goodPrice;
+    public static final String KEY_PHOTO_PATH = "photo_path";//从intent中获取图片路径
 
 
     private MyProgressDialog myProgressDialog;
@@ -47,6 +51,16 @@ public class AddGoodsActivity extends BaseActivity {
         return R.layout.activity_add_goods;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode==100&&resultCode== android.app.Activity.RESULT_OK){
+
+            String picPath = data.getStringExtra(KEY_PHOTO_PATH);
+            Bitmap bitmap = BitmapFactory.decodeFile(picPath);
+            iv_good.setImageBitmap(bitmap);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
     /**
      * 设置监听器
      */
@@ -63,6 +77,8 @@ public class AddGoodsActivity extends BaseActivity {
         bt_uploadpic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(AddGoodsActivity.this,SelectPhotoActivity.class);
+                startActivityForResult(intent,100);
 
             }
         });
