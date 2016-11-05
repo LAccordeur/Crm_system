@@ -2,6 +2,8 @@ package com.example.jjj.crm_system.activity;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.Nullable;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,10 +26,12 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import com.example.jjj.crm_system.utils.ImageLoader;
+
 import org.json.JSONObject;
 
 public class GoodsEditActivity extends BaseActivity {
-    private Goods good;
+    private Goods good = new Goods();
 
     private TextView tv_cancel;
     private EditText et_price, et_detail;
@@ -36,6 +40,7 @@ public class GoodsEditActivity extends BaseActivity {
 
     private Float price;
     private String detail;
+    private String imageUrl;
 
     private MyProgressDialog myProgressDialog;
     /**
@@ -43,13 +48,17 @@ public class GoodsEditActivity extends BaseActivity {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    private ImageLoader imageLoader;
+
 
     /**
      * 加载UI前的预初始化
      */
     @Override
     protected void init() {
+        imageLoader = ImageLoader.getInstance(this);
         good = (Goods) getIntent().getSerializableExtra("goods_info");
+        imageUrl = getIntent().getStringExtra("imageUrl");
 
     }
 
@@ -106,11 +115,12 @@ public class GoodsEditActivity extends BaseActivity {
                     Toast.makeText(getBaseContext(), "请添加描述", Toast.LENGTH_LONG).show();
                     return;
                 }
-
+                System.out.println("goodinfo-->"+good.getGoodsmoney()+"   "+good.getGoodsdetail());
                 good.setGoodsmoney(price);
                 good.setGoodsdetail(detail);
+                System.out.println("goodinfo-->"+good.getGoodsmoney()+"   "+good.getGoodsdetail());
+                new NetTask(baseContext){
 
-                new NetTask(getBaseContext()) {
 
                     /**
                      * 异步任务执行前的预处理
@@ -128,12 +138,14 @@ public class GoodsEditActivity extends BaseActivity {
                      */
                     @Override
                     protected JSONObject onLoad() {
+                        JSONObject jsonObject = new JSONObject();
                         try {
-                            GoodsService.upadateGoodsInf(good.getGoodsid().toString(), good);
+                            GoodsService.upadateGoodsInf(good.getGoodsid().toString(),good);
+                            jsonObject.put("StateCode",1);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        return null;
+                        return jsonObject;
                     }
 
                     /**
@@ -146,42 +158,19 @@ public class GoodsEditActivity extends BaseActivity {
                     protected void onSuccess(JSONObject jsonObject) throws Exception {
 
                         myProgressDialog.dismiss();
-                        Toast.makeText(getBaseContext(), "操作成功", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getBaseContext(),"操作成功",Toast.LENGTH_LONG).show();
+                        ActivityUtil.finishActivty();
                     }
 
-                    /**
-                     * 返回错误时的处理逻辑
-                     *
-                     * @param errorCode
-                     * @param errorStr
-                     */
-                    @Override
-                    protected void onError(int errorCode, String errorStr) {
-                        super.onError(errorCode, errorStr);
-                    }
 
-                    /**
-                     * 请求失败的处理逻辑
-                     */
-                    @Override
-                    protected void onFail() {
-                        super.onFail();
-                    }
-
-                    /**
-                     * 完成后的处理逻辑
-                     */
-                    @Override
-                    protected void onFinish() {
-                        super.onFinish();
-                        myProgressDialog.dismiss();
-                    }
                 }.execute();
 
 
             }
         });
     }
+
+
 
     /**
      * 请求数据，设置UI
@@ -241,5 +230,12 @@ public class GoodsEditActivity extends BaseActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
+        myProgressDialog = new MyProgressDialog(baseContext);
+
+        imageLoader.loadImage(imageUrl,iv_pic);
+        et_price.setText(good.getGoodsmoney()+"");
+        et_detail.setText(good.getGoodsdetail());
+
+
     }
 }
