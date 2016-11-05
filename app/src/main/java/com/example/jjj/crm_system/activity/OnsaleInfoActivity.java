@@ -19,6 +19,7 @@ public class OnsaleInfoActivity extends BaseActivity {
     private ImageView iv_onsale;
     private TextView tv_starttime;
     private TextView tv_endtime;
+    private String ImageUrl;
 
     private ImageLoader imageLoader;
     private MyProgressDialog myProgressDialog;
@@ -28,7 +29,9 @@ public class OnsaleInfoActivity extends BaseActivity {
      */
     @Override
     protected void init() {
+        System.out.println("OnsaleActivity started!");
         onsaleObject = (Activity)getIntent().getSerializableExtra("onsale_info");
+        ImageUrl = getIntent().getStringExtra("imageUrl");
         imageLoader = ImageLoader.getInstance(getBaseContext());
 
     }
@@ -71,6 +74,6 @@ public class OnsaleInfoActivity extends BaseActivity {
         tv_onsalename.setText(onsaleObject.getActivityname());
         tv_starttime.setText(onsaleObject.getActivitystarttime());
         tv_endtime.setText(onsaleObject.getActivitycuttime());
-        imageLoader.loadImage(onsaleObject.getActivityImageUrl(),iv_onsale);
+        imageLoader.loadImage(ImageUrl,iv_onsale);
     }
 }

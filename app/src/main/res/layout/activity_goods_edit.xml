@@ -57,6 +57,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:inputType="number"
+        android:saveEnabled="false"
         android:layout_toRightOf="@id/tv_price_goodedit"
         android:layout_below="@id/bt_uploadpic_goodedit"
         android:background="@drawable/shape_edittext"
@@ -76,7 +77,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:id="@+id/et_detail_goodedit"
-
+        android:saveEnabled="false"
         android:background="@drawable/shape_edittext"
         android:layout_toRightOf="@id/tv_price_goodedit"
 

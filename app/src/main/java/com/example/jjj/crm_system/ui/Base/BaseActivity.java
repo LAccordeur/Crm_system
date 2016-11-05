@@ -14,14 +14,14 @@ import org.json.JSONObject;
  */
 public abstract class BaseActivity extends AppCompatActivity {
     protected Context baseContext;
-    private static JSONObject object;//静态变量保存信息用于与fragment交互数据
+    private  JSONObject object;//静态变量保存信息用于与fragment交互数据
 
-    public static JSONObject getObject() {
+    public  JSONObject getObject() {
         return object;
     }
 
-    public static void setObject(JSONObject object) {
-        BaseActivity.object = object;
+    public  void setObject(JSONObject object) {
+        this.object = object;
     }
 
     @Override

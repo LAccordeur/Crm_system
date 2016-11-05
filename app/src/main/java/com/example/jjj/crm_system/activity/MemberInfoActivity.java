@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.jjj.crm_system.R;
@@ -19,6 +21,8 @@ import com.example.jjj.crm_system.service.CustomerService;
 import com.example.jjj.crm_system.service.po.Customer;
 import com.example.jjj.crm_system.ui.Base.BaseActivity;
 import com.example.jjj.crm_system.ui.dialog.MyProgressDialog;
+import com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshBase;
+import com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshScrollView;
 import com.example.jjj.crm_system.utils.ActivityUtil;
 
 import org.json.JSONObject;
@@ -32,7 +36,7 @@ public class MemberInfoActivity extends BaseActivity{
     private TextView tv_addmember,tv_totalnum;
     private memberAdapter adapter;
     private ListView lv_member;
-
+    private PullToRefreshScrollView ptr_member;
     private MyProgressDialog myProgressDialog;
     /**
      * 加载UI前的预初始化
@@ -71,6 +75,13 @@ public class MemberInfoActivity extends BaseActivity{
                 startActivity(intent);
             }
         });
+        ptr_member.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ScrollView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                initMemberlist();
+                ptr_member.onRefreshComplete();
+            }
+        });
 
     }
 
@@ -79,56 +90,42 @@ public class MemberInfoActivity extends BaseActivity{
      */
     @Override
     protected void initData() {
+
+        myProgressDialog = new MyProgressDialog(baseContext);
+
         iv_back = (ImageView)findViewById(R.id.iv_back_memberinfo);
         tv_addmember = (TextView)findViewById(R.id.tv_add_memberinfo);
         tv_totalnum = (TextView)findViewById(R.id.tv_membernum_memberinfo);
         lv_member = (ListView)findViewById(R.id.lv_memberlist_memberinfo);
-
+        ptr_member = (PullToRefreshScrollView) findViewById(R.id.lv_ptr_memberinfo);
 
         memberlist = new ArrayList<>();
 
-        tv_totalnum.setText(memberlist.size()+"");
+        //initMemberlist();
+        //tv_totalnum.setText(memberlist.size()+"");
         initListview();
-
-
     }
 
     private void initListview(){
         initMemberlist();
-        adapter = new memberAdapter(memberlist,getBaseContext());
-        lv_member.setAdapter(adapter);
+
 
     }
 
     private void initMemberlist(){
-       /* try {
-            memberlist = BonusPointService.getCustomersCreditByOrder();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
-        new NetTask(getBaseContext()){
-            /**
-             * 异步任务执行前的预处理
-             */
-            @Override
-            protected void onStart() {
-                super.onStart();
-                myProgressDialog.show();
-            }
 
-            /**
-             * 加载数据
-             *
-             * @return
-             */
+        new NetTask(baseContext){
+
             @Override
             protected JSONObject onLoad() {
+                JSONObject jsonObject = new JSONObject();
                 try {
                     memberlist = BonusPointService.getCustomersCreditByOrder();
+                    jsonObject.put("StateCode",1);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                return null;
+                return jsonObject;
             }
 
             /**
@@ -139,38 +136,33 @@ public class MemberInfoActivity extends BaseActivity{
              */
             @Override
             protected void onSuccess(JSONObject jsonObject) throws Exception {
-
+                myProgressDialog.dismiss();
+                //System.out.println(memberlist.toString());
+                adapter = new memberAdapter(memberlist,getBaseContext());
+                lv_member.setAdapter(adapter);
+                fixListViewHeight(lv_member);
+                int size = memberlist.size();
+                tv_totalnum.setText(size+"");
             }
 
-            /**
-             * 返回错误时的处理逻辑
-             *
-             * @param errorCode
-             * @param errorStr
-             */
-            @Override
-            protected void onError(int errorCode, String errorStr) {
-                super.onError(errorCode, errorStr);
-            }
-
-            /**
-             * 请求失败的处理逻辑
-             */
-            @Override
-            protected void onFail() {
-                super.onFail();
-            }
-
-            /**
-             * 完成后的处理逻辑
-             */
-            @Override
-            protected void onFinish() {
-                super.onFinish();
-            }
         }.execute();
     }
 
+    private void fixListViewHeight(ListView listView){
+        ListAdapter adapter = listView.getAdapter();
+        int totalHeight = 0;
+        if(adapter==null){
+            return;
+        }
+        for(int index = 0,len = adapter.getCount();index<len;index++){
+            View listViewItem = adapter.getView(index,null,listView);
+            listViewItem.measure(0,0);
+            totalHeight += listViewItem.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight()*(adapter.getCount()-1));
+        listView.setLayoutParams(params);
+    }
     private class memberAdapter extends BaseAdapter{
 
         private List<Customer> memberlist;
@@ -193,27 +185,27 @@ public class MemberInfoActivity extends BaseActivity{
 
         @Override
         public long getItemId(int position) {
-            return memberlist.get(position).getCustomid();
+            return position;
         }
 
         @Override
-        public View getView(final int position, View convertView, ViewGroup parent) {
+        public View getView(int position, View convertView, ViewGroup parent) {
             View view = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.item_memberlist,null);
             TextView tv_id = (TextView)view.findViewById(R.id.tv_id_memberitem);
             TextView tv_name = (TextView)view.findViewById(R.id.tv_name_memberitem);
             TextView tv_phonenum = (TextView)view.findViewById(R.id.tv_phonenum_memberitem);
             TextView tv_account = (TextView)view.findViewById(R.id.tv_account_memberitem);
 
-            tv_id.setText(memberlist.get(position).getCustomid());
+            tv_id.setText((position+1)+"");
             tv_name.setText(memberlist.get(position).getCustomname());
             tv_phonenum.setText(memberlist.get(position).getTelephonenumber());
-            tv_account.setText(memberlist.get(position).getBonuspoint());
-
+            tv_account.setText(memberlist.get(position).getBonuspoint()+"");
+            final Customer customer = memberlist.get(position);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(MemberInfoActivity.this,MemberDetailActivity.class);
-                    intent.putExtra("member_info",memberlist.get(position));
+                    intent.putExtra("member_info",customer);
                     startActivity(intent);
                 }
             });

@@ -18,7 +18,7 @@ import java.util.concurrent.ExecutionException;
  */
 public class BonusPointService{
     //录入积分
-    public static boolean logCreditAndHistory(int telephoneNumber, int bonusPoint, Map<String, Integer> goodsMap) throws  Exception{
+    public static boolean logCreditAndHistory(int telephoneNumber, int bonusPoint, Map<String, Float> goodsMap) throws  Exception{
         Map<String,String> map = new HashMap<>();
         String goodMapJson = JSON.toJSONString(goodsMap);
         map.put("TelephoneNumber",telephoneNumber+"");

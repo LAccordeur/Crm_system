@@ -75,7 +75,7 @@
             android:layout_height="25dp"
             android:layout_toRightOf="@+id/activity_chooser_view_content"
             android:text="添加>"
-            android:onClick="selectGoods"
+            android:id="@+id/tv_selectGoods"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:gravity="bottom"
@@ -86,8 +86,6 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:background="@drawable/table_shape"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:id="@+id/goods_list">
         <ListView
             android:layout_width="match_parent"
@@ -111,8 +109,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/price1"
-            android:text="25.00"
+
             android:textSize="20dp"
+            android:id="@+id/tv_totalmoney_score"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="200dp"
             />

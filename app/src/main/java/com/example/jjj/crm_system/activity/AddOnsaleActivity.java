@@ -1,5 +1,8 @@
 package com.example.jjj.crm_system.activity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +32,8 @@ public class AddOnsaleActivity extends BaseActivity {
     private TextView et_start,et_end;
     private Button bt_ok;
 
+    public static final String KEY_PHOTO_PATH = "photo_path";//从intent中获取图片路径
+
     private String name,starttime,endtime,detail;
     private MyProgressDialog myProgressDialog;
 
@@ -53,6 +58,17 @@ public class AddOnsaleActivity extends BaseActivity {
         return R.layout.activity_add_onsale;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode==200&&resultCode== android.app.Activity.RESULT_OK){
+
+            String picPath = data.getStringExtra(KEY_PHOTO_PATH);
+            Bitmap bitmap = BitmapFactory.decodeFile(picPath);
+            iv_pic.setImageBitmap(bitmap);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     /**
      * 设置监听器
      */
@@ -69,9 +85,13 @@ public class AddOnsaleActivity extends BaseActivity {
         bt_uploadpic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(AddOnsaleActivity.this,SelectPhotoActivity.class);
+                startActivityForResult(intent,200);
 
             }
         });
+
+
 
         //上传新活动
         bt_ok.setOnClickListener(new View.OnClickListener() {
@@ -185,6 +205,7 @@ public class AddOnsaleActivity extends BaseActivity {
     protected void initData() {
         myProgressDialog = new MyProgressDialog(baseContext);
 
+        iv_pic = (ImageView) findViewById(R.id.iv_pic_addonsale);
         iv_back = (ImageView)findViewById(R.id.iv_back_addonsale);
         et_name = (EditText)findViewById(R.id.et_onsaledetail_addonsale);
         et_intro = (EditText)findViewById(R.id.et_onsaledetail_addonsale);

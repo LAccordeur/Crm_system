@@ -5,7 +5,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/table_shape"
+        android:background="@drawable/shape_edittext"
         android:id="@+id/relativeLayout"
         >
 
@@ -19,18 +19,20 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/tv_goodsname_item_goods"
+            android:layout_toLeftOf="@+id/tv_num_item_goods"
             android:text="单价"
             android:textSize="20dp"
-            android:layout_marginLeft="170dp"
+            android:layout_marginRight="10dp"
             android:id="@+id/tv_price_item_goods" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="8dp"
             android:text="*1"
             android:textSize="20dp"
+            android:singleLine="true"
+            android:layout_alignParentRight="true"
             android:id="@+id/tv_num_item_goods"
-            android:layout_toRightOf="@+id/tv_price_item_goods" />
+             />
     </RelativeLayout>

@@ -22,6 +22,7 @@ import com.example.jjj.crm_system.ui.dialog.MyProgressDialog;
 import com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshBase;
 import com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshListView;
 import com.example.jjj.crm_system.utils.ActivityUtil;
+import com.example.jjj.crm_system.utils.ImageLoader;
 
 import org.json.JSONObject;
 
@@ -37,6 +38,7 @@ public class GoodsInfoActivity extends BaseActivity {
     private int intent_id;
     private PullToRefreshListView ptr_goods;
     private GoodsAdapter adpter;
+
 
     private MyProgressDialog myProgressDialog;
     /**
@@ -125,6 +127,8 @@ public class GoodsInfoActivity extends BaseActivity {
             @Override
             protected void onSuccess(JSONObject jsonObject) throws Exception {
                 myProgressDialog.dismiss();
+                adpter = new GoodsAdapter(goodsList,getBaseContext(),intent_id);
+                ptr_goods.setAdapter(adpter);
             }
 
             @Override
@@ -149,13 +153,13 @@ public class GoodsInfoActivity extends BaseActivity {
 
     private void initListview(){
         initGoodsList();
-        adpter = new GoodsAdapter(goodsList,this.getBaseContext(),intent_id);
-        ptr_goods.setAdapter(adpter);
+
 
 
     }
 
     private void viewManager(int Intent_id){
+
         if(Intent_id == 0){
             tv_add.setVisibility(View.INVISIBLE);
         }
@@ -165,12 +169,31 @@ public class GoodsInfoActivity extends BaseActivity {
         private List<Goods> goods;
         private Context context;
         private int intent_id;
+        private ImageLoader imageLoader;
+        //int size = goods.size();
+        String[] pics = {
+                "http://img5.imgtn.bdimg.com/it/u=3927785294,2227203319&fm=21&gp=0.jpg",
+                "http://img3.imgtn.bdimg.com/it/u=33661655,38962774&fm=21&gp=0.jpg",
+                "http://img1.imgtn.bdimg.com/it/u=2961982195,2751054664&fm=21&gp=0.jpg",
+                "http://img4.imgtn.bdimg.com/it/u=3395948725,3698335081&fm=21&gp=0.jpg",
+                "http://img2.imgtn.bdimg.com/it/u=1771546721,3299189929&fm=21&gp=0.jpg",
+                "http://img0.imgtn.bdimg.com/it/u=568074433,3501685007&fm=21&gp=0.jpg",
+                "http://img1.imgtn.bdimg.com/it/u=1557064153,1321986084&fm=21&gp=0.jpg",
+                "http://img4.imgtn.bdimg.com/it/u=3448216345,3013347829&fm=21&gp=0.jpg",
+                "http://img1.imgtn.bdimg.com/it/u=2353894688,934344371&fm=21&gp=0.jpg",
+                "http://img2.imgtn.bdimg.com/it/u=2686286601,1285312835&fm=21&gp=0.jpg",
+                "http://img2.imgtn.bdimg.com/it/u=637985416,1384724170&fm=21&gp=0.jpg",
+                "http://img3.imgtn.bdimg.com/it/u=1501848775,4221511710&fm=21&gp=0.jpg",
+
+        };
+
 
         public GoodsAdapter(List<Goods> goods, Context context,int intent_id) {
             this.goods = goods;
             this.context = context;
             this.intent_id = intent_id;
 
+            imageLoader = ImageLoader.getInstance(context);
         }
 
         @Override
@@ -190,15 +213,18 @@ public class GoodsInfoActivity extends BaseActivity {
 
         private class EditGoodsListener implements View.OnClickListener{
             private Goods good;
+            private String imageUrl;
 
-            public EditGoodsListener(Goods good) {
+            public EditGoodsListener(Goods good, String imageUrl) {
                 this.good = good;
+                this.imageUrl = imageUrl;
             }
 
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(GoodsInfoActivity.this,GoodsEditActivity.class);
                 intent.putExtra("goods_info",good);
+                intent.putExtra("imageUrl",imageUrl);
                 startActivity(intent);
 
 
@@ -214,12 +240,13 @@ public class GoodsInfoActivity extends BaseActivity {
             TextView tv_price_goods = (TextView)view.findViewById(R.id.tv_price_goodsitem);
             TextView tv_detailss_goods = (TextView)view.findViewById(R.id.tv_details_goodsitem);
             ImageView iv_edit_goods = (ImageView)view.findViewById(R.id.iv_goodsedit_goodsitem);
+            imageLoader.loadImage(pics[position],iv_pic_goods);
 
             if(intent_id == 0) iv_edit_goods.setVisibility(View.INVISIBLE);
             tv_name_goods.setText(goods.get(position).getGoodsname());
             tv_price_goods.setText(goods.get(position).getGoodsmoney()+"");
             tv_detailss_goods.setText(goods.get(position).getGoodsdetail());
-            iv_edit_goods.setOnClickListener(new EditGoodsListener(goods.get(position)));
+            iv_edit_goods.setOnClickListener(new EditGoodsListener(goods.get(position),pics[position]));
 
             return view;
         }

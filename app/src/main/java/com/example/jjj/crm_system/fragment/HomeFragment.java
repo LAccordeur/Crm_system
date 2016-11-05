@@ -1,9 +1,11 @@
 package com.example.jjj.crm_system.fragment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +20,8 @@ import com.example.jjj.crm_system.service.po.Shopowner;
 import com.example.jjj.crm_system.ui.Base.BaseFragment;
 import com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshBase;
 import com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshScrollView;
+import com.example.jjj.crm_system.utils.ImageLoader;
+import com.example.jjj.crm_system.utils.ImageUtil;
 
 import org.json.JSONObject;
 
@@ -37,6 +41,8 @@ public class HomeFragment extends BaseFragment{
     private Button bt_goods;
     private TextView tv_yearlySale,tv_daylySale,tv_monthlySale;
     private int DaylySales,MonthlySales,YealySales;
+    private ImageView iv_shop;
+
 
     @Override
     protected int getRootView() {
@@ -45,6 +51,7 @@ public class HomeFragment extends BaseFragment{
 
     @Override
     protected void init() {
+
 
 
     }
@@ -56,6 +63,7 @@ public class HomeFragment extends BaseFragment{
         tv_daylySale = (TextView) view.findViewById(R.id.tv_daylySale);
         tv_monthlySale = (TextView) view.findViewById(R.id.tv_monthlySale);
         tv_yearlySale = (TextView) view.findViewById(R.id.tv_yearlySale);
+        iv_shop = (ImageView) view.findViewById(R.id.iv_storepng_customerhome);
 
         tv_acconthome = (TextView)view.findViewById(R.id.tv_acconthome);
         tv_details = (TextView)view.findViewById(R.id.tv_details_home);
@@ -67,7 +75,10 @@ public class HomeFragment extends BaseFragment{
         tv_phonenum = (TextView) view.findViewById(R.id.tv_connect_home);
         tv_others = (TextView) view.findViewById(R.id.tv_others_customerhome);
 
+
         getShopownerSaleInfo();
+        setSalesInfo();
+
 
     }
 
@@ -135,20 +146,23 @@ public class HomeFragment extends BaseFragment{
 
             @Override
             protected void onSuccess(JSONObject jsonObject) throws Exception {
-                setSalesInfo();
+
+                tv_daylySale.setText("日销售额："+"  "+DaylySales);
+                tv_monthlySale.setText("月销售额："+"  "+MonthlySales);
+                tv_yearlySale.setText("年销售额："+"  "+YealySales);
+
+                tv_storename.setText(shopowner.getAccountname());
+                tv_others.setText(shopowner.getAccountdetail());
+                //tv_phonenum.setText();
+                tv_worktime.setText(shopowner.getOpeningtime()+"--"+shopowner.getClosingtime());
+                tv_address.setText(shopowner.getAccountaddress());
+                Bitmap bitmap = ImageUtil.getNetImage("http://img4.imgtn.bdimg.com/it/u=3245270535,3727521197&fm=21&gp=0.jpg");
+                iv_shop.setImageBitmap(bitmap);
             }
         }.execute();
     }
     private void setSalesInfo(){
-        tv_daylySale.setText("日销售额："+"  "+DaylySales);
-        tv_monthlySale.setText("月销售额："+"  "+MonthlySales);
-        tv_yearlySale.setText("年销售额："+"  "+YealySales);
-
-        tv_storename.setText(shopowner.getAccountname());
-        tv_others.setText(shopowner.getAccountdetail());
-        //tv_phonenum.setText();
-        tv_worktime.setText(shopowner.getOpeningtime()+"--"+shopowner.getClosingtime());
-        tv_address.setText(shopowner.getAccountaddress());
+        getShopownerSaleInfo();
     }
 
 

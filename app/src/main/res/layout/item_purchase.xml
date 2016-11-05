@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="消费："
+        android:textSize="24dp"
+        android:id="@+id/tv_money"
+        android:layout_margin="10dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="积分："
+        android:textSize="24dp"
+        android:layout_below="@id/tv_money"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/tv_point"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="234"
+        android:layout_toRightOf="@id/tv_money"
+        android:textSize="24dp"
+        android:id="@+id/tv_money_purchaseitem"
+        android:layout_alignTop="@id/tv_money"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="122"
+        android:textSize="24dp"
+        android:id="@+id/tv_point_purchaseitem"
+        android:layout_toRightOf="@id/tv_money"
+        android:layout_alignTop="@id/tv_point"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2016/10.31"
+        android:textSize="24dp"
+        android:layout_alignParentRight="true"
+        android:id="@+id/tv_time_purchaseitem"
+        android:layout_marginRight="10dp"
+        android:layout_below="@id/tv_point"/>
+
+
+</RelativeLayout>

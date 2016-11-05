@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/layout_border">
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@mipmap/ic_launcher"
+        android:id="@+id/iv_pic_selectitem"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_goodsname_selectitem"
+        android:layout_toRightOf="@id/iv_pic_selectitem"
+        android:layout_alignTop="@id/iv_pic_selectitem"
+        android:text="apple"
+        android:layout_marginLeft="10dp"
+        android:textColor="#000000"
+        android:textSize="20dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/iv_pic_selectitem"
+        android:text="apple"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/tv_price_selectgoods"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:layout_below="@id/tv_goodsname_selectitem"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:text="数量"
+        android:layout_marginLeft="10dp"
+
+        android:layout_alignTop="@+id/et_num_selectitem"
+        android:layout_toLeftOf="@+id/iv_removenum_selectitem"
+        android:textColor="#000000"
+        android:textSize="20dp"/>
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@mipmap/ic_add"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/iv_pic_selectitem"
+        android:id="@+id/iv_addnum_selectitem"
+        android:layout_marginRight="10dp"/>
+    <EditText
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/layout_border"
+        android:layout_alignBottom="@id/iv_pic_selectitem"
+        android:layout_toLeftOf="@id/iv_addnum_selectitem"
+        android:textColor="#000000"
+        android:inputType="number"
+        android:gravity="center_horizontal"
+        android:id="@+id/et_num_selectitem"
+        android:hint="0"/>
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignBottom="@id/iv_pic_selectitem"
+        android:layout_toLeftOf="@id/et_num_selectitem"
+        android:id="@+id/iv_removenum_selectitem"
+        android:src="@mipmap/ic_remove"/>
+
+
+
+
+</RelativeLayout>

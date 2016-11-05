@@ -1,5 +1,8 @@
 package com.example.jjj.crm_system.activity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +28,7 @@ public class AddGoodsActivity extends BaseActivity {
     private EditText et_name,et_price,et_details;
     private String goodName,goodDetails;
     private Float goodPrice;
+    public static final String KEY_PHOTO_PATH = "photo_path";//从intent中获取图片路径
 
 
     private MyProgressDialog myProgressDialog;
@@ -47,6 +51,16 @@ public class AddGoodsActivity extends BaseActivity {
         return R.layout.activity_add_goods;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode==100&&resultCode== android.app.Activity.RESULT_OK){
+
+            String picPath = data.getStringExtra(KEY_PHOTO_PATH);
+            Bitmap bitmap = BitmapFactory.decodeFile(picPath);
+            iv_good.setImageBitmap(bitmap);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
     /**
      * 设置监听器
      */
@@ -63,6 +77,8 @@ public class AddGoodsActivity extends BaseActivity {
         bt_uploadpic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(AddGoodsActivity.this,SelectPhotoActivity.class);
+                startActivityForResult(intent,100);
 
             }
         });
@@ -91,6 +107,7 @@ public class AddGoodsActivity extends BaseActivity {
                 final Goods newGood = new Goods();
                 newGood.setGoodsname(goodName);
                 newGood.setGoodsmoney(goodPrice);
+                newGood.setGoodsstorage(100);
                 newGood.setGoodsdetail(goodDetails);
 
                 new NetTask(baseContext){
@@ -113,12 +130,19 @@ public class AddGoodsActivity extends BaseActivity {
                      */
                     @Override
                     protected JSONObject onLoad() {
+                        JSONObject jsonObject = new JSONObject();
+
                         try {
-                            GoodsService.insertGoods(newGood);
+                            boolean flag = GoodsService.insertGoods(newGood);
+                            if(flag){
+                                jsonObject.put("StateCode",1);
+                            }
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        return null;
+
+                        return jsonObject;
                     }
 
                     /**
@@ -130,39 +154,11 @@ public class AddGoodsActivity extends BaseActivity {
                     @Override
                     protected void onSuccess(JSONObject jsonObject) throws Exception {
                         myProgressDialog.dismiss();
-                        Toast.makeText(getBaseContext(),"上传成功！",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getBaseContext(),"上传成功！",Toast.LENGTH_SHORT).show();
                         ActivityUtil.finishActivty();
 
                     }
 
-                    /**
-                     * 返回错误时的处理逻辑
-                     *
-                     * @param errorCode
-                     * @param errorStr
-                     */
-                    @Override
-                    protected void onError(int errorCode, String errorStr) {
-                        super.onError(errorCode, errorStr);
-                    }
-
-                    /**
-                     * 请求失败的处理逻辑
-                     */
-                    @Override
-                    protected void onFail() {
-                        super.onFail();
-
-                    }
-
-                    /**
-                     * 完成后的处理逻辑
-                     */
-                    @Override
-                    protected void onFinish() {
-                        super.onFinish();
-                        myProgressDialog.dismiss();
-                    }
                 }.execute();
 
 

@@ -90,7 +90,6 @@ public class MerchantloginActivity extends BaseActivity {
                             try {
                                 MerchintId = ShopownerService.shopownerValidate(username,password);
                                 jsonObject.put("StateCode",1);
-
                                 return jsonObject;
                             } catch (Exception e) {
                                 e.printStackTrace();
