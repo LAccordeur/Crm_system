@@ -8,10 +8,15 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -19,7 +24,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.SoftReference;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -298,6 +305,22 @@ public class ImageLoader {
         public DefaultImage() {
             super(Color.GRAY);
         }
+
+    }
+
+    //
+    //得到图片字符串
+    public  static String imageByteChange(ImageView imageView) throws Exception{
+        //得到图片字符串
+        imageView.setDrawingCacheEnabled(true);
+        Bitmap bm  = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.PNG,80,output);
+        bm.recycle();
+        byte[] bytes = output.toByteArray();
+        String bytesString = bytes.toString();
+
+        return bytesString;
 
     }
 }

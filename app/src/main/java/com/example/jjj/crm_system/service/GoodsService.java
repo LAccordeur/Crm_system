@@ -1,11 +1,14 @@
 package com.example.jjj.crm_system.service;
 
+import android.widget.ImageView;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.example.jjj.crm_system.service.po.Goods;
 import com.example.jjj.crm_system.utils.HttpUtil;
+import com.example.jjj.crm_system.utils.ImageLoader;
 
 
 import java.util.ArrayList;
@@ -68,17 +71,39 @@ public class GoodsService {
         return jsonObject.getBoolean("boolean");
     }
 
-    //删除商品
-    public static boolean deleteGoods(String goodsID) throws Exception{
-        Map<String,String> map = new HashMap<>();
-        map.put("GoodsID",goodsID);
-        // 定义发送请求的URL
-        String url = HttpUtil.BASE_URL + "deleteGoods.action";
-        // 发送请求
-        String str = HttpUtil.postRequest(url,map);
+    //上传商品图片
+    public  static boolean uploadGoodsImage(String id,ImageView imageView) throws Exception{
+        //得到图片字符串
+        String bytesString = ImageLoader.imageByteChange(imageView);
 
-        JSONObject jsonObject = JSON.parseObject(str);
-        return jsonObject.getBoolean("boolean");
+        //得到Map<String,String>
+        Map<String,String> map = new HashMap<>();
+        map.put("GoodsID",id);
+        map.put("GoodsPic",bytesString);
+
+        //上传图片
+        String url = HttpUtil.BASE_URL + "uploadGoodsImage.action";
+        String str = HttpUtil.postRequest(url,map);
+        JSONObject jsonObject = JSON.parseObject( HttpUtil.getRequest(url));
+        boolean bool = jsonObject.getBoolean("boolean");
+        return bool;
+
+    }
+
+    //获得商品图片
+    public  static boolean getGoodsImage(int id) throws Exception{
+        //得到Map<String,String>
+        Map<String,String> map = new HashMap<>();
+        //map.put("ShopownerID",userId);
+        map.put("GoodsID",id+"");
+
+        //上传图片
+        String url = HttpUtil.BASE_URL + "getGoodsImage.action";
+        String str = HttpUtil.postRequest(url,map);
+        JSONObject jsonObject = JSON.parseObject( HttpUtil.getRequest(url));
+        boolean bool = jsonObject.getBoolean("boolean");
+        return bool;
+
     }
 
 }

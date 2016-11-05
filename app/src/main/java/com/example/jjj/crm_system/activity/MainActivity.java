@@ -15,14 +15,18 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.jjj.crm_system.R;
+import com.example.jjj.crm_system.service.GoodsService;
+import com.example.jjj.crm_system.service.po.Goods;
 import com.example.jjj.crm_system.ui.Base.BaseActivity;
 import com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshBase;
 import com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshListView;
 import com.example.jjj.crm_system.utils.ActivityUtil;
+import com.example.jjj.crm_system.utils.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +46,16 @@ public class MainActivity extends BaseActivity {
         bt_merchantlogin_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String goodsID = "1";
+                Goods goods = new Goods();
+                ImageView imageView = null;
+                imageView = (ImageView) findViewById(R.id.aaaaa);
+                try {
+                    GoodsService.getGoodsImage(1);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 Intent intent = new Intent(MainActivity.this,MerchantloginActivity.class);
                 startActivity(intent);
             }

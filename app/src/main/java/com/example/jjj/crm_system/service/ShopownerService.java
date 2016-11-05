@@ -1,14 +1,20 @@
 package com.example.jjj.crm_system.service;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.widget.ImageView;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.jjj.crm_system.net.MyRequestParams;
 import com.example.jjj.crm_system.service.constant.ConstantValue;
 import com.example.jjj.crm_system.service.po.Shopowner;
 import com.example.jjj.crm_system.utils.HttpUtil;
+import com.example.jjj.crm_system.utils.ImageLoader;
 
 import org.apache.http.entity.StringEntity;
 
+import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
@@ -97,5 +103,24 @@ public class ShopownerService {
         JSONObject jsonObject = JSON.parseObject( HttpUtil.getRequest(url));
         int sales = jsonObject.getIntValue("YearlySales");
         return sales;
+    }
+
+    //上传商家头像
+    public  static boolean uploadShopownerImage(ImageView imageView) throws Exception{
+        //得到图片字符串
+        String bytesString = ImageLoader.imageByteChange(imageView);
+
+        //得到Map<String,String>
+        Map<String,String> map = new HashMap<>();
+        //map.put("ShopownerID",userId);
+        map.put("AccountPic",bytesString);
+
+        //上传图片
+        String url = HttpUtil.BASE_URL + "uploadShopownerImage.action";
+        String str = HttpUtil.postRequest(url,map);
+        JSONObject jsonObject = JSON.parseObject( HttpUtil.getRequest(url));
+        boolean bool = jsonObject.getBoolean("boolean");
+        return bool;
+
     }
 }
