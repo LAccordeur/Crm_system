@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.jjj.crm_system.R;
 import com.example.jjj.crm_system.activity.GoodsInfoActivity;
+import com.example.jjj.crm_system.activity.ImageViewActivity;
 import com.example.jjj.crm_system.activity.MemberInfoActivity;
 import com.example.jjj.crm_system.activity.MerchintInfoActivity;
 import com.example.jjj.crm_system.net.NetTask;
@@ -20,7 +21,6 @@ import com.example.jjj.crm_system.service.po.Shopowner;
 import com.example.jjj.crm_system.ui.Base.BaseFragment;
 import com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshBase;
 import com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshScrollView;
-import com.example.jjj.crm_system.utils.ImageLoader;
 import com.example.jjj.crm_system.utils.ImageUtil;
 
 import org.json.JSONObject;
@@ -121,6 +121,13 @@ public class HomeFragment extends BaseFragment{
             public void onClick(View view) {
                 Intent intent  = new Intent(getActivity(), MemberInfoActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        iv_shop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 

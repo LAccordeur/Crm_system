@@ -1,11 +1,21 @@
 package com.example.jjj.crm_system.utils;
 
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.provider.Settings;
 import android.widget.ImageView;
 
+import com.example.jjj.crm_system.activity.ImageViewActivity;
+
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,11 +24,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.concurrent.ExecutionException;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 /**
  * Created by 坤霖 on 2016/10/12.
  */
 
 public class ImageUtil {
+    public static Bitmap bitmapforShow = null;
 
 
     /**
@@ -113,4 +126,67 @@ public class ImageUtil {
         return;
     }
 
+    public static void showBitmap(String url,Context context){
+        Intent intent = new Intent(context,ImageViewActivity.class);
+        intent.putExtra("Url",url);
+        context.startActivity(intent);
+    }
+
+    public static void showBitmap(Bitmap bitmap, Context context){
+        System.out.println("ImageUtil-->Bitmap-->"+bitmap);
+        Intent intent = new Intent(context, ImageViewActivity.class);
+        intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
+
+        /*String path = "./sdcard/MyApp/";
+        String bitmapPath = path+ System.currentTimeMillis()+".png";
+        File file = new File(path);
+        if (!file.exists()){
+            file.mkdirs();
+            //System.out.println("file.exists()->"+file.exists());
+        }
+        File f = new File(bitmapPath);
+        try {
+            f.createNewFile();
+            FileOutputStream fout = null;
+            fout = new FileOutputStream(f);
+
+            boolean flag = bitmap.compress(Bitmap.CompressFormat.PNG,100,fout);
+            System.out.println("ImageUtil-->flag-->"+flag);
+            if (flag=true){
+                Intent intent = new Intent(context, ImageViewActivity.class);
+                intent.putExtra("bitmapPath",bitmapPath);
+                context.startActivity(intent);
+            }
+            fout.flush();
+            fout.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+*/
+
+        //Uri uri = Uri.parse(MediaStore.Images.Media.insertImage(context.getContentResolver(),bitmap,null,null));
+        //System.out.println("Uri-->"+uri);
+        //ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        /*bitmap.compress(Bitmap.CompressFormat.PNG,100,outputStream);
+        byte[] bytes = outputStream.toByteArray();
+
+        intent.putExtra("bitmap",bytes);*/
+        //Bundle bundle = new Bundle();
+        //bundle.putBundle("outputStream",outputStream);
+        //intent.putExtra();
+
+        setBitmapforShow(bitmap);
+        context.startActivity(intent);
+
+    }
+
+
+    public static Bitmap getBitmapforShow() {
+        return bitmapforShow;
+    }
+
+    public static void setBitmapforShow(Bitmap bitmapforShow) {
+        ImageUtil.bitmapforShow = bitmapforShow;
+    }
 }

@@ -8,9 +8,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".app.MyApp"
@@ -81,6 +80,10 @@
             android:name=".activity.GoodsEditActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".activity.ImageViewActivity"
+            android:label="ImageViewActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".activity.MemberInfoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -92,8 +95,9 @@
         <activity
             android:name=".activity.SelectGoodsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.SelectPhotoActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".activity.SelectPhotoActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

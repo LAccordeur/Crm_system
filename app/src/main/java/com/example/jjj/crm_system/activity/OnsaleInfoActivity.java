@@ -1,16 +1,24 @@
 package com.example.jjj.crm_system.activity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.jjj.crm_system.R;
-import com.example.jjj.crm_system.domain.CustomerOnsaleObject;
+
 import com.example.jjj.crm_system.service.po.Activity;
 import com.example.jjj.crm_system.ui.Base.BaseActivity;
 import com.example.jjj.crm_system.ui.dialog.MyProgressDialog;
 import com.example.jjj.crm_system.utils.ActivityUtil;
 import com.example.jjj.crm_system.utils.ImageLoader;
+import com.example.jjj.crm_system.utils.ImageUtil;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public class OnsaleInfoActivity extends BaseActivity {
     private ImageView iv_back;
@@ -55,6 +63,22 @@ public class OnsaleInfoActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 ActivityUtil.finishActivty();
+            }
+        });
+        iv_onsale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iv_onsale.setDrawingCacheEnabled(true);
+                Bitmap bitmap = iv_onsale.getDrawingCache();
+                iv_onsale.setDrawingCacheEnabled(false);
+                System.out.println("Bitmap-->"+bitmap);
+
+                /*Intent intent = new Intent(OnsaleInfoActivity.this,ImageViewActivity.class);
+                intent.putExtra("Url",ImageUrl);
+                startActivity(intent);*/
+
+                //ImageUtil.showBitmap(ImageUrl,OnsaleInfoActivity.this);
+                ImageUtil.showBitmap(bitmap,getBaseContext());
             }
         });
 
