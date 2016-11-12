@@ -17,6 +17,7 @@ import com.example.jjj.crm_system.net.NetTask;
 import com.example.jjj.crm_system.service.ActivityService;
 import com.example.jjj.crm_system.service.po.Activity;
 import com.example.jjj.crm_system.ui.Base.BaseFragment;
+import com.example.jjj.crm_system.ui.dialog.MyProgressDialog;
 import com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshBase;
 import com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshListView;
 import com.example.jjj.crm_system.ui.view.CircleImage;
@@ -40,6 +41,7 @@ public class AccountFragment extends BaseFragment {
     private PullToRefreshListView ptr_onsaleList;
     private List<Activity> activityList;
     private MyAdapter adapter;
+    private MyProgressDialog myProgressDialog;
     @Override
     protected void setListener() {
         iv_add.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +64,7 @@ public class AccountFragment extends BaseFragment {
             @Override
             public void onRefresh(PullToRefreshBase<ListView> refreshView) {
                 initListView();
-                ptr_onsaleList.onRefreshComplete();
+
             }
         });
     }
@@ -77,6 +79,7 @@ public class AccountFragment extends BaseFragment {
 
     @Override
     protected void init() {
+        myProgressDialog = new MyProgressDialog(getContext());
 
     }
 
@@ -93,10 +96,14 @@ public class AccountFragment extends BaseFragment {
         new NetTask(getContext()){
 
             /**
-             * 加载数据
-             *
-             * @return
+             * 异步任务执行前的预处理
              */
+            @Override
+            protected void onStart() {
+                myProgressDialog.show();
+                super.onStart();
+            }
+
             @Override
             protected JSONObject onLoad() {
 
@@ -120,6 +127,8 @@ public class AccountFragment extends BaseFragment {
             protected void onSuccess(JSONObject jsonObject) throws Exception {
                 adapter = new MyAdapter(activityList,getContext());
                 ptr_onsaleList.setAdapter(adapter);
+                myProgressDialog.dismiss();
+                ptr_onsaleList.onRefreshComplete();
             }
         }.execute();
     }
@@ -183,6 +192,16 @@ public class AccountFragment extends BaseFragment {
 
 
             final Activity onsaleObject = list.get(i);
+
+            Myview.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, OnsaleInfoActivity.class);
+                    intent.putExtra("onsale_info",onsaleObject);
+                    intent.putExtra("imageUrl",urls[i]);
+                    startActivity(intent);
+                }
+            });
 
             tv_detail.setOnClickListener(new View.OnClickListener() {
                 @Override

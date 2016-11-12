@@ -19,6 +19,7 @@ import com.example.jjj.crm_system.net.NetTask;
 import com.example.jjj.crm_system.service.ShopownerService;
 import com.example.jjj.crm_system.service.po.Shopowner;
 import com.example.jjj.crm_system.ui.Base.BaseFragment;
+import com.example.jjj.crm_system.ui.dialog.MyProgressDialog;
 import com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshBase;
 import com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshScrollView;
 import com.example.jjj.crm_system.utils.ImageUtil;
@@ -42,6 +43,7 @@ public class HomeFragment extends BaseFragment{
     private TextView tv_yearlySale,tv_daylySale,tv_monthlySale;
     private int DaylySales,MonthlySales,YealySales;
     private ImageView iv_shop;
+    private MyProgressDialog myProgressDialog;
 
 
     @Override
@@ -51,7 +53,7 @@ public class HomeFragment extends BaseFragment{
 
     @Override
     protected void init() {
-
+        myProgressDialog = new MyProgressDialog(getContext());
 
 
     }
@@ -135,6 +137,14 @@ public class HomeFragment extends BaseFragment{
 
     private void getShopownerSaleInfo(){
         new NetTask(getContext()){
+            /**
+             * 异步任务执行前的预处理
+             */
+            @Override
+            protected void onStart() {
+                myProgressDialog.show();
+                super.onStart();
+            }
 
             @Override
             protected JSONObject onLoad() {
@@ -165,6 +175,7 @@ public class HomeFragment extends BaseFragment{
                 tv_address.setText(shopowner.getAccountaddress());
                 Bitmap bitmap = ImageUtil.getNetImage("http://img4.imgtn.bdimg.com/it/u=3245270535,3727521197&fm=21&gp=0.jpg");
                 iv_shop.setImageBitmap(bitmap);
+                myProgressDialog.dismiss();
             }
         }.execute();
     }

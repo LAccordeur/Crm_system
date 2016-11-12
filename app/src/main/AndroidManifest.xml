@@ -20,7 +20,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.Merchint"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,16 +31,18 @@
         <activity
             android:name=".activity.CustomerActivity"
             android:label="@string/title_activity_customer"
-            android:theme="@style/AppTheme.NoActionBar" />
+             />
         <activity
             android:name=".activity.MerchantloginActivity"
             android:label="@string/title_activity_merchantlogin"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.Merchint"
+            />
         <activity
             android:name=".activity.CustomerloginActivity"
             android:label="@string/title_activity_customerlogin"
             android:parentActivityName=".activity.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.Merchint"
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.jjj.crm_system.activity.MainActivity" />
@@ -55,49 +58,50 @@
         <activity
             android:name=".activity.MerchantActivity"
             android:label="@string/title_activity_merchant"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.Merchint"
+             />
         <activity
             android:name=".activity.MerchintInfoActivity"
             android:label="MerchintInfoActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            />
         <activity
             android:name=".activity.GoodsInfoActivity"
             android:label="GoodsInfoActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+             />
         <activity
             android:name=".activity.OnsaleInfoActivity"
             android:label="OnsaleInfoActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+             />
         <activity
             android:name=".activity.AddOnsaleActivity"
             android:label="OnsaleInfoActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+             />
         <activity
             android:name=".activity.AddGoodsActivity"
             android:label="AddGoodsActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+             />
         <activity
             android:name=".activity.GoodsEditActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+             />
         <activity
             android:name=".activity.ImageViewActivity"
             android:label="ImageViewActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+             />
         <activity
             android:name=".activity.MemberInfoActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+             />
         <activity
             android:name=".activity.AddMemberActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+             />
         <activity
             android:name=".activity.MemberDetailActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            />
         <activity
             android:name=".activity.SelectGoodsActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+             />
         <activity
             android:name=".activity.SelectPhotoActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+             />
     </application>
 
 </manifest>

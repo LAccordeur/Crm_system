@@ -91,7 +91,13 @@ public class GoodsInfoActivity extends BaseActivity {
             @Override
             public void onRefresh(PullToRefreshBase<ListView> refreshView) {
                 initListview();
-                ptr_goods.onRefreshComplete();
+                /*ptr_goods.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        ptr_goods.onRefreshComplete();
+                    }
+                },1000);*/
+
 
             }
         });
@@ -129,6 +135,7 @@ public class GoodsInfoActivity extends BaseActivity {
                 myProgressDialog.dismiss();
                 adpter = new GoodsAdapter(goodsList,getBaseContext(),intent_id);
                 ptr_goods.setAdapter(adpter);
+                ptr_goods.onRefreshComplete();
             }
 
             @Override
@@ -247,6 +254,7 @@ public class GoodsInfoActivity extends BaseActivity {
             tv_price_goods.setText(goods.get(position).getGoodsmoney()+"");
             tv_detailss_goods.setText(goods.get(position).getGoodsdetail());
             iv_edit_goods.setOnClickListener(new EditGoodsListener(goods.get(position),pics[position]));
+            view.setOnClickListener(new EditGoodsListener(goods.get(position),pics[position]));
 
             return view;
         }

@@ -82,7 +82,6 @@ public class MerchantloginActivity extends BaseActivity {
                         protected void onStart() {
                             myProgressDialog.show();
                             super.onStart();
-
                         }
 
                         @Override

@@ -84,12 +84,13 @@ public class ScoreFragment extends BaseFragment {
         bt_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                phone = Integer.parseInt(et_phone.getText().toString().trim());
-                money = Integer.parseInt(et_money.getText().toString().trim());
-                point = Integer.parseInt(et_point.getText().toString().trim());
                 if (et_phone.getText()==null||et_phone.getText().equals("")){
                     Toast.makeText(getContext(),"请输入电话号码！",Toast.LENGTH_SHORT).show();
                 }
+                phone = Integer.parseInt(et_phone.getText().toString().trim());
+                money = Integer.parseInt(et_money.getText().toString().trim());
+                point = Integer.parseInt(et_point.getText().toString().trim());
+
                 new NetTask(getContext()){
 
                     @Override
