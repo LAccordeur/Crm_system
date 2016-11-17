@@ -22,6 +22,7 @@ import com.example.jjj.crm_system.ui.Base.BaseFragment;
 import com.example.jjj.crm_system.ui.dialog.MyProgressDialog;
 import com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshBase;
 import com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshScrollView;
+import com.example.jjj.crm_system.utils.CacheUtil;
 import com.example.jjj.crm_system.utils.ImageUtil;
 
 import org.json.JSONObject;
@@ -44,6 +45,9 @@ public class HomeFragment extends BaseFragment{
     private int DaylySales,MonthlySales,YealySales;
     private ImageView iv_shop;
     private MyProgressDialog myProgressDialog;
+    private static boolean isFirstLoad = true;
+    private CacheUtil cacheUtil;
+    private String ivUrl = "http://img4.imgtn.bdimg.com/it/u=3245270535,3727521197&fm=21&gp=0.jpg";
 
 
     @Override
@@ -61,6 +65,7 @@ public class HomeFragment extends BaseFragment{
     @Override
     protected void initData(View view) {
         ptr_home = (PullToRefreshScrollView) view.findViewById(R.id.ptr_home);
+        cacheUtil = new CacheUtil(getContext());
 
         tv_daylySale = (TextView) view.findViewById(R.id.tv_daylySale);
         tv_monthlySale = (TextView) view.findViewById(R.id.tv_monthlySale);
@@ -77,9 +82,12 @@ public class HomeFragment extends BaseFragment{
         tv_phonenum = (TextView) view.findViewById(R.id.tv_connect_home);
         tv_others = (TextView) view.findViewById(R.id.tv_others_customerhome);
 
+        Bitmap bitmap = ImageUtil.getNetImage(ivUrl);
+        iv_shop.setImageBitmap(bitmap);
 
-        getShopownerSaleInfo();
-        setSalesInfo();
+        loadCache();
+
+
 
 
     }
@@ -129,20 +137,22 @@ public class HomeFragment extends BaseFragment{
         iv_shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getActivity(),ImageViewActivity.class);
+                intent.putExtra("Url",ivUrl);
+                startActivity(intent);
             }
         });
 
     }
 
-    private void getShopownerSaleInfo(){
+    public void getShopownerSaleInfo(){
         new NetTask(getContext()){
             /**
              * 异步任务执行前的预处理
              */
             @Override
             protected void onStart() {
-                myProgressDialog.show();
+              // myProgressDialog.show();
                 super.onStart();
             }
 
@@ -164,7 +174,7 @@ public class HomeFragment extends BaseFragment{
             @Override
             protected void onSuccess(JSONObject jsonObject) throws Exception {
 
-                tv_daylySale.setText("日销售额："+"  "+DaylySales);
+                /*tv_daylySale.setText("日销售额："+"  "+DaylySales);
                 tv_monthlySale.setText("月销售额："+"  "+MonthlySales);
                 tv_yearlySale.setText("年销售额："+"  "+YealySales);
 
@@ -173,14 +183,45 @@ public class HomeFragment extends BaseFragment{
                 //tv_phonenum.setText();
                 tv_worktime.setText(shopowner.getOpeningtime()+"--"+shopowner.getClosingtime());
                 tv_address.setText(shopowner.getAccountaddress());
-                Bitmap bitmap = ImageUtil.getNetImage("http://img4.imgtn.bdimg.com/it/u=3245270535,3727521197&fm=21&gp=0.jpg");
+                Bitmap bitmap = ImageUtil.getNetImage(ivUrl);
                 iv_shop.setImageBitmap(bitmap);
+                myProgressDialog.dismiss();*/
+                cacheUtil.setShopownerInfo(shopowner);
+                cacheUtil.setDaylySales(DaylySales+"");
+                cacheUtil.setMonthlySales(MonthlySales+"");
+                cacheUtil.setYearlySales(YealySales+"");
+
+
+                setInfoView(shopowner,DaylySales+"",YealySales+"",MonthlySales+"");
+                isFirstLoad = false;
                 myProgressDialog.dismiss();
+
+
             }
         }.execute();
     }
-    private void setSalesInfo(){
-        getShopownerSaleInfo();
+    private void setInfoView(Shopowner shopowner,String daylySales,String yealySales,String monthlySales){
+        tv_daylySale.setText("日销售额："+"  "+daylySales);
+        tv_monthlySale.setText("月销售额："+"  "+monthlySales);
+        tv_yearlySale.setText("年销售额："+"  "+yealySales);
+
+        tv_storename.setText(shopowner.getAccountname());
+        tv_others.setText(shopowner.getAccountdetail());
+        //tv_phonenum.setText();
+        tv_worktime.setText(shopowner.getOpeningtime()+"--"+shopowner.getClosingtime());
+        tv_address.setText(shopowner.getAccountaddress());
+
+    }
+
+    private void loadCache(){
+        if ((cacheUtil.getShopownerInfo()!=null)&&(cacheUtil.getDayrlySales()!=null)&&(cacheUtil.getMonthlySales()!=null)&&(cacheUtil.getYearlySales()!=null)){
+            shopowner = cacheUtil.getShopownerInfo();
+            String DaylySales = cacheUtil.getDayrlySales();
+            String MonthlySales = cacheUtil.getMonthlySales();
+            String YealySales = cacheUtil.getYearlySales();
+            setInfoView(shopowner,DaylySales,YealySales,MonthlySales);
+        }
+
     }
 
 

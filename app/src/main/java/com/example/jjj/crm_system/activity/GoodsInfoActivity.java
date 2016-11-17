@@ -91,13 +91,6 @@ public class GoodsInfoActivity extends BaseActivity {
             @Override
             public void onRefresh(PullToRefreshBase<ListView> refreshView) {
                 initListview();
-                /*ptr_goods.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        ptr_goods.onRefreshComplete();
-                    }
-                },1000);*/
-
 
             }
         });
@@ -229,12 +222,11 @@ public class GoodsInfoActivity extends BaseActivity {
 
             @Override
             public void onClick(View view) {
+                if (intent_id==1){
                 Intent intent = new Intent(GoodsInfoActivity.this,GoodsEditActivity.class);
                 intent.putExtra("goods_info",good);
                 intent.putExtra("imageUrl",imageUrl);
-                startActivity(intent);
-
-
+                startActivity(intent);}
             }
         }
 

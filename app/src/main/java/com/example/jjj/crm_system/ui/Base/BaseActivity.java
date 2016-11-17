@@ -18,15 +18,9 @@ import org.json.JSONObject;
  */
 public abstract class BaseActivity extends AppCompatActivity {
     protected Context baseContext;
-    private  JSONObject object;//静态变量保存信息用于与fragment交互数据
 
-    public  JSONObject getObject() {
-        return object;
-    }
 
-    public  void setObject(JSONObject object) {
-        this.object = object;
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

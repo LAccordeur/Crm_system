@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.jjj.crm_system.R;
 import com.example.jjj.crm_system.activity.AddOnsaleActivity;
@@ -64,6 +65,7 @@ public class AccountFragment extends BaseFragment {
             @Override
             public void onRefresh(PullToRefreshBase<ListView> refreshView) {
                 initListView();
+                Toast.makeText(getContext(),"刷新成功",Toast.LENGTH_SHORT).show();
 
             }
         });

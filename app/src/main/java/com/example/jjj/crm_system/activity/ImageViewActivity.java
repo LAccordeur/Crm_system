@@ -15,7 +15,9 @@ import android.widget.TextView;
 import com.example.jjj.crm_system.R;
 import com.example.jjj.crm_system.ui.Base.BaseActivity;
 import com.example.jjj.crm_system.utils.ActivityUtil;
+import com.example.jjj.crm_system.utils.CacheUtil;
 import com.example.jjj.crm_system.utils.ImageUtil;
+import com.lidroid.xutils.BitmapUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -24,24 +26,18 @@ import java.io.IOException;
 public class ImageViewActivity extends BaseActivity {
     private FrameLayout fl;
     private ImageView iv,iv_back;
+    private BitmapUtils bitmapUtils;
     private TextView tv;
-
-    private  Bitmap bitmap;
     private String imageUrl;
+    private CacheUtil cacheUtil;
+    private Bitmap bitmap;
 
 
     @Override
     protected void init() {
 
-        System.out.println("ImagViewActivity starts!!!");
-
-        //imageUrl = getIntent().getStringExtra("Url");
-        try {
-            bitmap = ImageUtil.getBitmapforShow();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        imageUrl = getIntent().getStringExtra("Url");
+       // cacheUtil = new CacheUtil(this);
 
     }
 
@@ -137,12 +133,10 @@ public class ImageViewActivity extends BaseActivity {
         iv = (ImageView) findViewById(R.id.imageView);
         tv = (TextView) findViewById(R.id.tv_imagename);
 
-        //if (imageUrl!=null){
-          //  ImageUtil.LoadImage(iv,imageUrl);
-        //}
-        if(bitmap!=null){
-            iv.setImageBitmap(bitmap);
+        if (imageUrl!=null){
+            ImageUtil.LoadImage(iv,imageUrl);
         }
+        //iv.setImageBitmap(bitmap);
 
 
         tv.setText("查看图片");

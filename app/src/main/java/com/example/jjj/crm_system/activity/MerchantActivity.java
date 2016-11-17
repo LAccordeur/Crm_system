@@ -27,6 +27,8 @@ public class MerchantActivity extends BaseActivity {
     private TextView tv_title_merchant;
     private TextView tv_back_merchant;
     private List<BaseFragment> fragments;
+    private HomeFragment homeFragment;
+    private AccountFragment accountFragment;
     private android.support.v4.app.FragmentManager fm;
     private MyPagerAdapter adapter;
 
@@ -46,10 +48,12 @@ public class MerchantActivity extends BaseActivity {
     protected void init() {
 
         merchint_id = getIntent().getIntExtra("MerchintId",0);
+        homeFragment = new HomeFragment();
+        accountFragment = new AccountFragment();
         System.out.println("MerchintActivty started!"+"Merchint_id-->"+merchint_id);
         fragments = new ArrayList<BaseFragment>();
-        fragments.add(0,new HomeFragment());
-        fragments.add(1,new AccountFragment());
+        fragments.add(0,homeFragment);
+        fragments.add(1,accountFragment);
         fragments.add(2,new ScoreFragment());
         fm = getSupportFragmentManager();
 
@@ -95,6 +99,7 @@ public class MerchantActivity extends BaseActivity {
                         break;
                     case R.id.rb_home_merchant:
                         position = 0;
+                        homeFragment.getShopownerSaleInfo();
                         break;
                     case R.id.rb_score_merchant:
                         position = 2;

@@ -44,14 +44,6 @@ public class CustomerIndividualFragment extends BaseFragment {
     @Override
     protected void init() {
         imageLoader = ImageLoader.getInstance(this.getContext());
-        JSONObject jsonObject = myActivity.getObject();
-        if (!(jsonObject.equals("")||jsonObject==null)){
-            try {
-                phonenum = jsonObject.getString("phonenum");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
 
     }
 
@@ -62,7 +54,7 @@ public class CustomerIndividualFragment extends BaseFragment {
         lv = (PullToRefreshListView) view.findViewById(R.id.lv_accountinfo_coustomerindividual);
         iv_portrait_customerindividual = (CircleImageView) view.findViewById(R.id.iv_portrait_customerindividual);
 
-        if (phonenum!=null||!phonenum.equals("")){
+        if (phonenum!=null){
             initCustmorInfo(phonenum);
         }
     }

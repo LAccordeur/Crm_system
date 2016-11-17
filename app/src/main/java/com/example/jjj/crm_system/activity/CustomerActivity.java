@@ -29,6 +29,7 @@ public class CustomerActivity extends BaseActivity {
     private List<BaseFragment> fragments;
     private FragmentManager fm;
     private MyPagerAdapter adapter;
+    private CustomerHomeFragment customerHomeFragment;
 
     @Override
     protected int getRootView() {
@@ -37,8 +38,9 @@ public class CustomerActivity extends BaseActivity {
 
     @Override
     protected void init() {
+        customerHomeFragment = new CustomerHomeFragment();
         fragments = new ArrayList<BaseFragment>();
-        fragments.add(0,new CustomerHomeFragment());
+        fragments.add(0,customerHomeFragment);
         fragments.add(1,new CustomerIndividualFragment());
         fm = getSupportFragmentManager();
 
@@ -47,6 +49,7 @@ public class CustomerActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+
         rb_home_customer = (RadioButton)findViewById(R.id.rb_home_customer);
         rb_individual_customer = (RadioButton)findViewById(R.id.rb_individual_customer);
         vp_customer = (MyViewPager)findViewById(R.id.vp_customer);
@@ -92,6 +95,7 @@ public class CustomerActivity extends BaseActivity {
                 switch (checkedId) {
                     case R.id.rb_home_customer:
                         position = 0;
+                        customerHomeFragment.initOnsaleList();
                         break;
                     case R.id.rb_individual_customer:
                         position = 1;

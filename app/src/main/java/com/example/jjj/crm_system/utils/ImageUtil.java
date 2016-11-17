@@ -31,7 +31,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
  */
 
 public class ImageUtil {
-    public static Bitmap bitmapforShow = null;
+    private static CacheUtil cacheUtil;
 
 
     /**
@@ -109,11 +109,9 @@ public class ImageUtil {
     public static void downloadImage(String url, String path, String bitName) throws IOException {
         Bitmap bitmap = getNetImage(url);
         File file = new File(path);//打开指定文件夹
-        //System.out.println("file.exists()->"+file.exists());
         //文件夹不存在则新创建
         if (!file.exists()){
             file.mkdirs();
-            //System.out.println("file.exists()->"+file.exists());
         }
         File f = new File(path+bitName+".png");
         f.createNewFile();
@@ -136,57 +134,12 @@ public class ImageUtil {
         System.out.println("ImageUtil-->Bitmap-->"+bitmap);
         Intent intent = new Intent(context, ImageViewActivity.class);
         intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
-
-        /*String path = "./sdcard/MyApp/";
-        String bitmapPath = path+ System.currentTimeMillis()+".png";
-        File file = new File(path);
-        if (!file.exists()){
-            file.mkdirs();
-            //System.out.println("file.exists()->"+file.exists());
-        }
-        File f = new File(bitmapPath);
-        try {
-            f.createNewFile();
-            FileOutputStream fout = null;
-            fout = new FileOutputStream(f);
-
-            boolean flag = bitmap.compress(Bitmap.CompressFormat.PNG,100,fout);
-            System.out.println("ImageUtil-->flag-->"+flag);
-            if (flag=true){
-                Intent intent = new Intent(context, ImageViewActivity.class);
-                intent.putExtra("bitmapPath",bitmapPath);
-                context.startActivity(intent);
-            }
-            fout.flush();
-            fout.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-*/
-
-        //Uri uri = Uri.parse(MediaStore.Images.Media.insertImage(context.getContentResolver(),bitmap,null,null));
-        //System.out.println("Uri-->"+uri);
-        //ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        /*bitmap.compress(Bitmap.CompressFormat.PNG,100,outputStream);
-        byte[] bytes = outputStream.toByteArray();
-
-        intent.putExtra("bitmap",bytes);*/
-        //Bundle bundle = new Bundle();
-        //bundle.putBundle("outputStream",outputStream);
-        //intent.putExtra();
-
-        setBitmapforShow(bitmap);
+        cacheUtil = new CacheUtil(context);
+        cacheUtil.setBitmap(bitmap);
         context.startActivity(intent);
 
     }
 
 
-    public static Bitmap getBitmapforShow() {
-        return bitmapforShow;
-    }
 
-    public static void setBitmapforShow(Bitmap bitmapforShow) {
-        ImageUtil.bitmapforShow = bitmapforShow;
-    }
 }

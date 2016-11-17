@@ -73,12 +73,11 @@ public class OnsaleInfoActivity extends BaseActivity {
                 iv_onsale.setDrawingCacheEnabled(false);
                 System.out.println("Bitmap-->"+bitmap);
 
-                /*Intent intent = new Intent(OnsaleInfoActivity.this,ImageViewActivity.class);
+                //ImageUtil.showBitmap(bitmap,OnsaleInfoActivity.this);
+                Intent intent = new Intent(OnsaleInfoActivity.this,ImageViewActivity.class);
                 intent.putExtra("Url",ImageUrl);
-                startActivity(intent);*/
+                startActivity(intent);
 
-                //ImageUtil.showBitmap(ImageUrl,OnsaleInfoActivity.this);
-                ImageUtil.showBitmap(bitmap,getBaseContext());
             }
         });
 
