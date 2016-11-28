@@ -34,13 +34,13 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_edittext"
                 android:hint="请输入您的手机号"
-                android:textSize="24dp"
+                android:padding="10dp"
+                android:textSize="24sp"
                 android:id="@+id/et_phonenum_customerlogin"/>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:orientation="horizontal">
+                android:paddingTop="10dp">
                 <EditText
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
@@ -49,11 +49,11 @@
                     android:textSize="24dp"
                     android:singleLine="true"
                     android:id="@+id/et_VerificationCode_customerlogin"
-                    android:paddingRight="10dp"
+                    android:paddingRight="15dp"
                     android:background="@drawable/shape_edittext"/>
 
                 <Button
-                    android:layout_width="100dp"
+                    android:layout_width="wrap_content"
                     android:layout_alignParentRight="true"
                     android:paddingLeft="10dp"
                     android:id="@+id/bt_getVerificationcode_customerlogin"
@@ -61,7 +61,7 @@
                     android:gravity="center"
                     android:layout_alignTop="@id/et_VerificationCode_customerlogin"
                     android:layout_alignBottom="@id/et_VerificationCode_customerlogin"
-                    android:background="@drawable/shape_edittext"
+                    android:background="@drawable/bg_identify_normal"
                     android:text="获取验证码"/>
             </RelativeLayout>
             <Button

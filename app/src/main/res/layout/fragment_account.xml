@@ -5,11 +5,11 @@
     <com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/ptr_onsaleList_account"></com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshListView>
-    <com.example.jjj.crm_system.ui.view.CircleImageView
+        android:id="@+id/ptr_onsaleList_account"/>
+    <ImageButton
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:src="@drawable/selecter_addonsale_pic"
+        android:background="@drawable/selecter_addonsale_pic"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginRight="30dp"

@@ -118,7 +118,7 @@ public class MemberDetailActivity extends BaseActivity {
 
         tv_name.setText(customer.getCustomname());
         tv_phone.setText(customer.getTelephonenumber());
-        tv_totalaccount.setText("总积分："+customer.getBonuspoint());
+        tv_totalaccount.setText(customer.getBonuspoint()+"");
 
     }
 

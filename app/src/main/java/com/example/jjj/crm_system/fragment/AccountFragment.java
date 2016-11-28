@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ import com.example.jjj.crm_system.ui.pulltorefresh.PullToRefreshListView;
 import com.example.jjj.crm_system.ui.view.CircleImage;
 import com.example.jjj.crm_system.ui.view.CircleImageView;
 import com.example.jjj.crm_system.utils.ImageLoader;
+import com.mob.commons.SMSSDK;
 
 import org.json.JSONObject;
 
@@ -38,11 +40,12 @@ import java.util.List;
  * 商家优惠活动
  */
 public class AccountFragment extends BaseFragment {
-    private CircleImageView iv_add;
+    private ImageButton iv_add;
     private PullToRefreshListView ptr_onsaleList;
     private List<Activity> activityList;
     private MyAdapter adapter;
     private MyProgressDialog myProgressDialog;
+
     @Override
     protected void setListener() {
         iv_add.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +76,7 @@ public class AccountFragment extends BaseFragment {
 
     @Override
     protected void initData(View view) {
-        iv_add = (CircleImageView)view.findViewById(R.id.iv_addOnsale_account);
+        iv_add = (ImageButton)view.findViewById(R.id.iv_addOnsale_account);
         ptr_onsaleList = (PullToRefreshListView)view.findViewById(R.id.ptr_onsaleList_account);
         activityList = new ArrayList<>();
         initListView();

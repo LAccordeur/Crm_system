@@ -34,7 +34,7 @@
         android:id="@+id/vp_customer"
         android:layout_above="@+id/rg_customer"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"></com.example.jjj.crm_system.ui.view.MyViewPager>
+        android:layout_alignParentStart="true"/>
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,6 +48,8 @@
             android:layout_weight="1"
             android:id="@+id/rb_home_customer"
             android:button="@null"
+            android:text="商家主页"
+            android:textColor="@drawable/selector_textcolor_customer"
             android:gravity="center"
             android:checked="true"
             android:paddingTop="4dp"
@@ -58,6 +60,8 @@
             android:layout_weight="1"
             android:id="@+id/rb_individual_customer"
             android:button="@null"
+            android:text="个人中心"
+            android:textColor="@drawable/selector_textcolor_customer"
             android:gravity="center"
             android:checked="true"
             android:paddingTop="4dp"

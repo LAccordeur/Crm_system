@@ -22,6 +22,7 @@ import com.example.jjj.crm_system.net.NetTask;
 import com.example.jjj.crm_system.service.BonusPointService;
 import com.example.jjj.crm_system.service.po.Goods;
 import com.example.jjj.crm_system.ui.Base.BaseFragment;
+import com.example.jjj.crm_system.ui.dialog.MyProgressDialog;
 import com.example.jjj.crm_system.utils.ActivityUtil;
 
 import org.json.JSONObject;
@@ -50,6 +51,7 @@ public class ScoreFragment extends BaseFragment {
     private List<Good_Num> choosedGoodsList;
     private Float totalMoney = Float.valueOf(0);
     private HashMap<String,Float> goodsMap;
+    private MyProgressDialog myProgressDialog;
 
     @Override
     protected int getRootView() {
@@ -59,6 +61,7 @@ public class ScoreFragment extends BaseFragment {
     @Override
     protected void init() {
         goodsMap = new HashMap<>();
+        myProgressDialog = new MyProgressDialog(getContext());
     }
 
     @Override
@@ -88,10 +91,18 @@ public class ScoreFragment extends BaseFragment {
                     Toast.makeText(getContext(),"请输入电话号码！",Toast.LENGTH_SHORT).show();
                 }
                 phone = Integer.parseInt(et_phone.getText().toString().trim());
-                money = Integer.parseInt(et_money.getText().toString().trim());
-                point = Integer.parseInt(et_point.getText().toString().trim());
+               // money = Integer.parseInt(et_money.getText().toString().trim());
+                //point = Integer.parseInt(et_point.getText().toString().trim());
 
                 new NetTask(getContext()){
+                    /**
+                     * 异步任务执行前的预处理
+                     */
+                    @Override
+                    protected void onStart() {
+                        myProgressDialog.show();
+                        super.onStart();
+                    }
 
                     @Override
                     protected JSONObject onLoad() {
@@ -99,12 +110,8 @@ public class ScoreFragment extends BaseFragment {
                         boolean flag = false;
                         try {
                              flag = BonusPointService.logCreditAndHistory(phone, Integer.parseInt(totalMoney.toString().substring(0,totalMoney.toString().indexOf("."))),goodsMap);
-                            if(flag){
-                                jsonObject.put("StateCode",1);
-                            }else{
-                                jsonObject.put("StateCode",300);
-                                jsonObject.put("StateMessage","上传失败！");
-                            }
+                             jsonObject.put("StateCode",1);
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -115,10 +122,12 @@ public class ScoreFragment extends BaseFragment {
 
                     @Override
                     protected void onSuccess(JSONObject jsonObject) throws Exception {
+                        myProgressDialog.dismiss();
                         Toast.makeText(getContext(),"上传成功！",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getActivity(), MemberInfoActivity.class);
                         startActivity(intent);
                         clearData();
+
                     }
                 }.execute();
             }
